@@ -7,7 +7,5 @@ namespace WarehouseCore.Entities.Storage;
 /// </summary>
 public class Address : CodeEntity
 {
-    public Address(string code) : base(code)
-    {
-    }
+    public ICollection<Container> Containers { get; set; }
 }
