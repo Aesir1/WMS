@@ -11,5 +11,5 @@ public class ReceiptTransit : TransitBase
         TransitLabel = TransitLabel.GoodsReceipt;
     }
 
-    public override Address Address { get; set; }
+    public sealed override Address Address { get; set; }
 }
