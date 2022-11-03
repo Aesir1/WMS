@@ -25,8 +25,18 @@ public class WarehouseDbContext : DbContext
         modelBuilder.Entity<Dimension>().HasKey(d => d.CodeId);
         modelBuilder.Entity<Heaviness>().HasKey(h => h.CodeId);
 
+        //modelBuilder.Entity<Address>().IsConnectedWithContainer(c => c.Address);
+        //List<int> ints= Enumerable.Range(1, 9).ToList();
+        //Enumerable.Where(ints, i => i % 2 == 0);
+        //ints.Where(i => i % 2 == 0).ForEach(Console.WriteLine);
+        //s.ForEach();
 
-        modelBuilder.Entity<Container>().HasOne(c => c.Address).WithMany(c => c.Containers);
-        modelBuilder.Entity<Container>().HasOne(c => c.Article).WithMany(a => a.Containers);
+        modelBuilder.Entity<Container>().HasOne(c => c.Address).WithMany(ad => ad.Containers);
+        modelBuilder.Entity<Container>().HasOne(c => c.Article).WithMany(ar => ar.Containers);
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder modelConfigurationBuilder)
+    {
+        modelConfigurationBuilder.Properties<decimal>().HavePrecision(9, 4);
     }
 }

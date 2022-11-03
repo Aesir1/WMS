@@ -35,19 +35,14 @@ namespace WarehouseInfrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DimensionCodeId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("HeavinessCodeId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Qty")
-                        .HasColumnType("int");
 
                     b.HasKey("Guid");
 
@@ -98,6 +93,9 @@ namespace WarehouseInfrastructure.Migrations
                     b.Property<DateTime>("DateTimeUpdated")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Qty")
+                        .HasColumnType("int");
+
                     b.HasKey("ContainerId");
 
                     b.HasIndex("AddressCodeId");
@@ -122,10 +120,12 @@ namespace WarehouseInfrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Length")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(9, 4)
+                        .HasColumnType("decimal(9,4)");
 
                     b.Property<decimal>("Width")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(9, 4)
+                        .HasColumnType("decimal(9,4)");
 
                     b.HasKey("CodeId");
 
@@ -158,15 +158,11 @@ namespace WarehouseInfrastructure.Migrations
                 {
                     b.HasOne("WarehouseCore.Entities.Unities.Dimension", "Dimension")
                         .WithMany("Articles")
-                        .HasForeignKey("DimensionCodeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DimensionCodeId");
 
                     b.HasOne("WarehouseCore.Entities.Unities.Heaviness", "Heaviness")
                         .WithMany("Articles")
-                        .HasForeignKey("HeavinessCodeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HeavinessCodeId");
 
                     b.Navigation("Dimension");
 

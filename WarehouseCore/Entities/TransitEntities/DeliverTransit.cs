@@ -5,11 +5,7 @@ namespace WarehouseCore.Entities.TransitEntities;
 
 public class DeliverTransit : TransitBase
 {
-    public DeliverTransit(Address address)
+    public DeliverTransit(Address address) : base(address, TransitLabel.GoodsReceipt)
     {
-        Address = address;
-        TransitLabel = TransitLabel.GoodsIssue;
     }
-
-    public override Address Address { get; set; }
 }

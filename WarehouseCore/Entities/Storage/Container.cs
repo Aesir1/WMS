@@ -10,6 +10,7 @@ namespace WarehouseCore.Entities.Storage;
 public class Container : BaseEntity
 {
     public int ContainerId { get; set; }
+    public int Qty { get; set; }
     public Address Address { get; set; }
     public Article Article { get; set; }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WarehouseInfrastructure.Migrations
 {
-    public partial class FirstORM : Migration
+    public partial class StorageDesign : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,8 +28,8 @@ namespace WarehouseInfrastructure.Migrations
                 columns: table => new
                 {
                     CodeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Length = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Width = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Length = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: false),
+                    Width = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: false),
                     DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -60,9 +60,8 @@ namespace WarehouseInfrastructure.Migrations
                 {
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Qty = table.Column<int>(type: "int", nullable: false),
-                    DimensionCodeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    HeavinessCodeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DimensionCodeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    HeavinessCodeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -73,14 +72,12 @@ namespace WarehouseInfrastructure.Migrations
                         name: "FK_Articles_Dimension_DimensionCodeId",
                         column: x => x.DimensionCodeId,
                         principalTable: "Dimension",
-                        principalColumn: "CodeId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CodeId");
                     table.ForeignKey(
                         name: "FK_Articles_Heaviness_HeavinessCodeId",
                         column: x => x.HeavinessCodeId,
                         principalTable: "Heaviness",
-                        principalColumn: "CodeId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CodeId");
                 });
 
             migrationBuilder.CreateTable(
@@ -89,6 +86,7 @@ namespace WarehouseInfrastructure.Migrations
                 {
                     ContainerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Qty = table.Column<int>(type: "int", nullable: false),
                     AddressCodeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ArticleGuid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
