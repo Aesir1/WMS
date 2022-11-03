@@ -12,7 +12,6 @@ public class Article : GuidEntity
     }
 
     public string Name { get; set; }
-    
 
 
     public Dimension? Dimension { get; set; }
