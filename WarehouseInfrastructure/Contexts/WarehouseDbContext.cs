@@ -18,13 +18,19 @@ public class WarehouseDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<UserInfo> UserInfos { get; set; }
     public DbSet<Permission> Permissions { get; set; }
-    
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public WarehouseDbContext(DbContextOptions<WarehouseDbContext> dbOptions) : base(dbOptions)
     {
-        optionsBuilder.UseSqlServer(
-            @"Server=localhost,1433;Database=Warehouse;Integrated Security=false;User ID=sa;Password=Test1234@;");
+        
     }
+    
+    // Commented until the the db connection work as a service through dependency injection
+    
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    // {
+    //     optionsBuilder.UseSqlServer(
+    //         @"Server=localhost,1433;Database=Warehouse;Integrated Security=false;User ID=sa;Password=Test1234@;");
+    // }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
