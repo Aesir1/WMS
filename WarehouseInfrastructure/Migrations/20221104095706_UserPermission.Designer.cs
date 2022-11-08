@@ -12,7 +12,7 @@ using WarehouseInfrastructure.Contexts;
 namespace WarehouseInfrastructure.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    [Migration("20221103135806_UserPermission")]
+    [Migration("20221104095706_UserPermission")]
     partial class UserPermission
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("Guid");
 
-                    b.ToTable("Department");
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Organisation.Permission", b =>
@@ -89,7 +89,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("Guid");
 
-                    b.ToTable("Permission");
+                    b.ToTable("Permissions");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Product.Article", b =>
@@ -139,7 +139,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("CodeId");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Storage.Container", b =>
@@ -199,7 +199,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("CodeId");
 
-                    b.ToTable("Dimension");
+                    b.ToTable("Dimensions");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Unities.Heaviness", b =>
@@ -221,7 +221,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("CodeId");
 
-                    b.ToTable("Heaviness");
+                    b.ToTable("Heavinesses");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.User.User", b =>
@@ -250,7 +250,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasIndex("PermissionGuid");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.User.UserInfo", b =>
@@ -280,7 +280,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("UserInfo");
+                    b.ToTable("UserInfos");
                 });
 
             modelBuilder.Entity("DepartmentUser", b =>
