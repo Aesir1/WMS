@@ -9,15 +9,20 @@ namespace WarehouseInfrastructure.Contexts;
 
 public class WarehouseDbContext : DbContext
 {
+    public WarehouseDbContext(DbContextOptions<WarehouseDbContext> dbOptions) : base(dbOptions)
+    {
+    }
+
     public DbSet<Article> Articles { get; set; }
     public DbSet<Container> Containers { get; set; }
-
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer(
-            @"Server=localhost,1433;Database=Warehouse;Integrated Security=false;User ID=sa;Password=Test1234@;");
-    }
+    public DbSet<Address> Addresses { get; set; }
+    public DbSet<Heaviness> Heavinesses { get; set; }
+    public DbSet<Dimension> Dimensions { get; set; }
+    public DbSet<Department> Departments { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<UserInfo> UserInfos { get; set; }
+    public DbSet<Permission> Permissions { get; set; }
+    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -38,8 +43,10 @@ public class WarehouseDbContext : DbContext
         //ints.Where(i => i % 2 == 0).ForEach(Console.WriteLine);
         //s.ForEach();
 
-        modelBuilder.Entity<Container>().HasOne(c => c.Address).WithMany(ad => ad.Containers);
-        modelBuilder.Entity<Container>().HasOne(c => c.Article).WithMany(ar => ar.Containers);
+        modelBuilder.Entity<Container>().HasOne(c => c.Address).WithMany(ad => ad.Containers)
+            .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Container>().HasOne(c => c.Article).WithMany(ar => ar.Containers)
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<User>().HasOne(e => e.UserInfo).WithOne(ui => ui.User).HasForeignKey<User>(ui => ui.Guid);
         modelBuilder.Entity<User>().HasOne(u => u.Permission).WithMany(p => p.Users);

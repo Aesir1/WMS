@@ -1,5 +1,6 @@
 using WarehouseCore.Entities.AbstractEntities;
 using WarehouseCore.Entities.Product;
+using WarehouseCore.Exceptions;
 
 namespace WarehouseCore.Entities.Storage;
 
@@ -9,7 +10,13 @@ namespace WarehouseCore.Entities.Storage;
 /// </summary>
 public class Container : BaseEntity
 {
+    public Container(int containerId, int qty)
+    {
+        ContainerId = containerId;
+        Qty = qty > 0 ? qty : throw new ContainerZeroException();
+    }
     public int ContainerId { get; set; }
+
     public int Qty { get; set; }
     public Address Address { get; set; }
     public Article Article { get; set; }

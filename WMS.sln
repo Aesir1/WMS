@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WarehouseAPI", "WarehouseAPI", "{7FA1BD54-D614-4690-A06D-D4BBB158F7C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcService", "GrpcService\GrpcService.csproj", "{3AA6A58F-39AB-477E-B134-8E92A86CBF1F}"
@@ -22,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTest", "Integrat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XunitTest", "XunitTest\XunitTest.csproj", "{48012D53-40BF-4A67-A9E0-E5032D764CBB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WarehouseApp", "WarehouseApp", "{1D14B2CB-0045-4A35-8A8B-A6381AAC74FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseApp", "WarehouseApp\WarehouseApp.csproj", "{FA376EAE-8687-4868-A450-C1BCC3D41881}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +38,7 @@ Global
 		{01218100-6B40-4B25-A708-945AEBA05091} = {6549ADE6-9F54-49A2-8154-7ECB32418445}
 		{207634DA-7152-4285-93DD-F91ED88982C9} = {6549ADE6-9F54-49A2-8154-7ECB32418445}
 		{48012D53-40BF-4A67-A9E0-E5032D764CBB} = {6549ADE6-9F54-49A2-8154-7ECB32418445}
+		{FA376EAE-8687-4868-A450-C1BCC3D41881} = {1D14B2CB-0045-4A35-8A8B-A6381AAC74FF}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3AA6A58F-39AB-477E-B134-8E92A86CBF1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -65,5 +69,9 @@ Global
 		{48012D53-40BF-4A67-A9E0-E5032D764CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48012D53-40BF-4A67-A9E0-E5032D764CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48012D53-40BF-4A67-A9E0-E5032D764CBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA376EAE-8687-4868-A450-C1BCC3D41881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA376EAE-8687-4868-A450-C1BCC3D41881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA376EAE-8687-4868-A450-C1BCC3D41881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA376EAE-8687-4868-A450-C1BCC3D41881}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
