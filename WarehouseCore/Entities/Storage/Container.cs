@@ -10,19 +10,14 @@ namespace WarehouseCore.Entities.Storage;
 /// </summary>
 public class Container : BaseEntity
 {
+    public Container(int containerId, int qty)
+    {
+        ContainerId = containerId;
+        Qty = qty > 0 ? qty : throw new ContainerZeroException();
+    }
     public int ContainerId { get; set; }
 
-    public int Qty
-    {
-        get => Qty;
-        set
-        {
-            if (value.Equals(0)) throw new ContainerZeroException();
-
-            Qty = value;
-        }
-    }
-
+    public int Qty { get; set; }
     public Address Address { get; set; }
     public Article Article { get; set; }
 }

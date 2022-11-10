@@ -15,17 +15,15 @@ public class StorageEntities
         // Arrange
         var sqliteConnection = new SqliteConnection("DataSource=:memory:");
         sqliteConnection.Open();
-        var dbContext = new DbContextTest(sqliteConnection);
+        DbContextTest dbContext = new DbContextTest(sqliteConnection);
         dbContext.Database.EnsureCreated();
 
         dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
             {
-                new()
+                new(1111, 5)
                 {
-                    ContainerId = 1111,
-                    Qty = 5,
                     Address = new Address
                     {
                         CodeId = "STR1",
@@ -58,10 +56,8 @@ public class StorageEntities
         {
             Containers = new List<Container>
             {
-                new()
+                new(1111, 5)
                 {
-                    ContainerId = 1111,
-                    Qty = 5,
                     Address = new Address
                     {
                         CodeId = "STR1",
@@ -96,10 +92,8 @@ public class StorageEntities
         {
             Containers = new List<Container>
             {
-                new()
+                new(1111, 5)
                 {
-                    ContainerId = 1111,
-                    Qty = 5,
                     Address = new Address
                     {
                         CodeId = "STR1",
@@ -135,10 +129,8 @@ public class StorageEntities
         {
             Containers = new List<Container>
             {
-                new()
+                new(1111, 0)
                 {
-                    ContainerId = 1111,
-                    Qty = 0,
                     Address = new Address
                     {
                         CodeId = "STR1",
