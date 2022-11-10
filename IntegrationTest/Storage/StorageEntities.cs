@@ -3,6 +3,7 @@ using Shouldly;
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
 using WarehouseCore.Exceptions;
+using WarehouseInfrastructure.Contexts;
 using Xunit;
 
 namespace IntegrationTest.Storage;
@@ -13,19 +14,14 @@ public class StorageEntities
     public void StorageRelatedEntitiesAreCreated()
     {
         // Arrange
-        var sqliteConnection = new SqliteConnection("DataSource=:memory:");
-        sqliteConnection.Open();
-        var dbContext = new DbContextTest(sqliteConnection);
-        dbContext.Database.EnsureCreated();
+        WarehouseDbContext dbContext = new DbContextTest().ContextTest;
 
         dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
             {
-                new()
+                new(1111, 5)
                 {
-                    ContainerId = 1111,
-                    Qty = 5,
                     Address = new Address
                     {
                         CodeId = "STR1",
@@ -49,19 +45,13 @@ public class StorageEntities
     public void ArticleAndContainerAreDeleted()
     {
         // Arrange
-        var sqliteConnection = new SqliteConnection("DataSource=:memory:");
-        sqliteConnection.Open();
-        var dbContext = new DbContextTest(sqliteConnection);
-        dbContext.Database.EnsureCreated();
-
+        WarehouseDbContext dbContext = new DbContextTest().ContextTest;
         dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
             {
-                new()
+                new(1111, 5)
                 {
-                    ContainerId = 1111,
-                    Qty = 5,
                     Address = new Address
                     {
                         CodeId = "STR1",
@@ -82,24 +72,20 @@ public class StorageEntities
         article.Count.ShouldBe(0);
         container.Count.ShouldBe(0);
     }
-
+    
     [Fact]
     public void AddressAreNotDeletedAfterArticleDeleted()
     {
         // Arrange
-        var sqliteConnection = new SqliteConnection("DataSource=:memory:");
-        sqliteConnection.Open();
-        var dbContext = new DbContextTest(sqliteConnection);
+        WarehouseDbContext dbContext = new DbContextTest().ContextTest;
         dbContext.Database.EnsureCreated();
-
+    
         dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
             {
-                new()
+                new(1111, 5)
                 {
-                    ContainerId = 1111,
-                    Qty = 5,
                     Address = new Address
                     {
                         CodeId = "STR1",
@@ -121,24 +107,20 @@ public class StorageEntities
         address.Count.ShouldBe(1);
         container.Count.ShouldBe(0);
     }
-
+    
     [Fact]
     public void ContainerNotCreatedWhenQtyZero()
     {
         // Arrange
-        var sqliteConnection = new SqliteConnection("DataSource=:memory:");
-        sqliteConnection.Open();
-        var dbContext = new DbContextTest(sqliteConnection);
+        WarehouseDbContext dbContext = new DbContextTest().ContextTest;
         dbContext.Database.EnsureCreated();
         // Act & Assert
         Should.Throw<ContainerZeroException>(() => dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
             {
-                new()
+                new(1111, 0)
                 {
-                    ContainerId = 1111,
-                    Qty = 0,
                     Address = new Address
                     {
                         CodeId = "STR1",

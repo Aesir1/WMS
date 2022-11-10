@@ -12,17 +12,86 @@ using WarehouseInfrastructure.Contexts;
 namespace WarehouseInfrastructure.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    [Migration("20221103095712_StorageDesign")]
-    partial class StorageDesign
+    [Migration("20221109150143_ContextInjection")]
+    partial class ContextInjection
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DepartmentUser", b =>
+                {
+                    b.Property<Guid>("DepartmentsGuid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UsersGuid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("DepartmentsGuid", "UsersGuid");
+
+                    b.HasIndex("UsersGuid");
+
+                    b.ToTable("DepartmentUser");
+                });
+
+            modelBuilder.Entity("WarehouseCore.Entities.Organisation.Department", b =>
+                {
+                    b.Property<Guid>("Guid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateTimeCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateTimeUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Guid");
+
+                    b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("WarehouseCore.Entities.Organisation.Permission", b =>
+                {
+                    b.Property<Guid>("Guid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Create")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("DateTimeCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateTimeUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Modified")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Read")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("UserManager")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Guid");
+
+                    b.ToTable("Permissions");
+                });
 
             modelBuilder.Entity("WarehouseCore.Entities.Product.Article", b =>
                 {
@@ -71,7 +140,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("CodeId");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Storage.Container", b =>
@@ -80,7 +149,7 @@ namespace WarehouseInfrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContainerId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContainerId"));
 
                     b.Property<string>("AddressCodeId")
                         .IsRequired()
@@ -131,7 +200,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("CodeId");
 
-                    b.ToTable("Dimension");
+                    b.ToTable("Dimensions");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Unities.Heaviness", b =>
@@ -153,7 +222,81 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("CodeId");
 
-                    b.ToTable("Heaviness");
+                    b.ToTable("Heavinesses");
+                });
+
+            modelBuilder.Entity("WarehouseCore.Entities.User.User", b =>
+                {
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateTimeCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateTimeUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PermissionGuid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Guid");
+
+                    b.HasIndex("PermissionGuid");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("WarehouseCore.Entities.User.UserInfo", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PostalCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("UserInfos");
+                });
+
+            modelBuilder.Entity("DepartmentUser", b =>
+                {
+                    b.HasOne("WarehouseCore.Entities.Organisation.Department", null)
+                        .WithMany()
+                        .HasForeignKey("DepartmentsGuid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WarehouseCore.Entities.User.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersGuid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Product.Article", b =>
@@ -190,6 +333,30 @@ namespace WarehouseInfrastructure.Migrations
                     b.Navigation("Article");
                 });
 
+            modelBuilder.Entity("WarehouseCore.Entities.User.User", b =>
+                {
+                    b.HasOne("WarehouseCore.Entities.User.UserInfo", "UserInfo")
+                        .WithOne("User")
+                        .HasForeignKey("WarehouseCore.Entities.User.User", "Guid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WarehouseCore.Entities.Organisation.Permission", "Permission")
+                        .WithMany("Users")
+                        .HasForeignKey("PermissionGuid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Permission");
+
+                    b.Navigation("UserInfo");
+                });
+
+            modelBuilder.Entity("WarehouseCore.Entities.Organisation.Permission", b =>
+                {
+                    b.Navigation("Users");
+                });
+
             modelBuilder.Entity("WarehouseCore.Entities.Product.Article", b =>
                 {
                     b.Navigation("Containers");
@@ -208,6 +375,12 @@ namespace WarehouseInfrastructure.Migrations
             modelBuilder.Entity("WarehouseCore.Entities.Unities.Heaviness", b =>
                 {
                     b.Navigation("Articles");
+                });
+
+            modelBuilder.Entity("WarehouseCore.Entities.User.UserInfo", b =>
+                {
+                    b.Navigation("User")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
