@@ -4,10 +4,22 @@ using WarehouseInfrastructure.Contexts;
 
 namespace IntegrationTest;
 
-public class DbContextTest : WarehouseDbContext
+public class DbContextTest
 {
-    public DbContextTest(SqliteConnection sqliteConnection) : base(new DbContextOptionsBuilder<WarehouseDbContext>()
-        .UseSqlite(sqliteConnection).Options)
+    public WarehouseDbContext ContextTest;
+
+    public DbContextTest()
     {
+        ContextTest =
+            new WarehouseDbContext(
+                new DbContextOptionsBuilder<WarehouseDbContext>().UseSqlite(OpenConnection()).Options);
+        ContextTest.Database.EnsureCreated();
+    }
+
+    private static SqliteConnection OpenConnection()
+    {
+        SqliteConnection sqliteConnection = new("DataSource=:memory:");
+        sqliteConnection.Open();
+        return sqliteConnection;
     }
 }
