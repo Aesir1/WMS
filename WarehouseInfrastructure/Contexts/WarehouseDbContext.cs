@@ -23,7 +23,6 @@ public class WarehouseDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<UserInfo> UserInfos { get; set; }
     public DbSet<Permission> Permissions { get; set; }
-    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -38,13 +37,13 @@ public class WarehouseDbContext : DbContext
         modelBuilder.Entity<UserInfo>().HasKey(ui => ui.UserId);
         modelBuilder.Entity<Department>().HasKey(d => d.Guid);
         modelBuilder.Entity<Permission>().HasKey(p => p.Guid);
-        modelBuilder.Entity<Address>().IsConnectedWithContainer(c => c.Address);
-        modelBuilder.Entity<Article>().IsConnectedWithContainer(a => a.Article);
-
+        
         // modelBuilder.Entity<Container>().HasOne(c => c.Address).WithMany(ad => ad.Containers)
         //     .OnDelete(DeleteBehavior.Cascade);
         // modelBuilder.Entity<Container>().HasOne(c => c.Article).WithMany(ar => ar.Containers)
         //     .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Address>().IsConnectedWithContainer(c => c.Address);
+        modelBuilder.Entity<Article>().IsConnectedWithContainer(a => a.Article);
 
         modelBuilder.Entity<User>().HasOne(e => e.UserInfo).WithOne(ui => ui.User).HasForeignKey<User>(ui => ui.Guid);
         modelBuilder.Entity<User>().HasOne(u => u.Permission).WithMany(p => p.Users);

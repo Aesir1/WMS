@@ -1,22 +1,17 @@
-using WarehouseApp.Interfaces;
+using IntegrationTest.Interfaces;
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
 using WarehouseCore.Exceptions;
 using WarehouseInfrastructure.Contexts;
+using Xunit;
 
-namespace WarehouseApp.StorageRules;
+namespace IntegrationTest.Storage;
 
-public class ContainerRules : IContainerRules
+public class ContainerRulesTest : IContainerRulesTest
 {
-    private readonly WarehouseDbContext _context;
-
-    public ContainerRules(WarehouseDbContext warehouseDbContext)
-    {
-        _context = warehouseDbContext;
-    }
-
     public Container Create(int id, int qty, Article article, Address address)
     {
+        WarehouseDbContext _context = new DbContextTest().ContextTest;
         Container container = new Container(id, qty)
         {
             Article = article,
@@ -43,6 +38,7 @@ public class ContainerRules : IContainerRules
     }
     public Container Modified(int id, int qty, Address? address = default, Article? article = default)
     {
+        WarehouseDbContext _context = new DbContextTest().ContextTest;
         Container? container = _context.Containers.First(c => c.ContainerId == id);
         if (container == null)
         {
@@ -61,6 +57,7 @@ public class ContainerRules : IContainerRules
 
     public bool Delete(int id)
     {
+        WarehouseDbContext _context = new DbContextTest().ContextTest;
         Container? container = _context.Containers.First(c => c.ContainerId == id);
         if (container == null)
         {
