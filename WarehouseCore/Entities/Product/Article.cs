@@ -1,10 +1,11 @@
 using WarehouseCore.Entities.AbstractEntities;
 using WarehouseCore.Entities.Storage;
 using WarehouseCore.Entities.Unities;
+using WarehouseCore.Interfaces;
 
 namespace WarehouseCore.Entities.Product;
 
-public class Article : GuidEntity
+public class Article : GuidEntity, IAttachableToContainer
 {
     public Article(string name)
     {

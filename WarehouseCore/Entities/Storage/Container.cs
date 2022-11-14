@@ -13,7 +13,7 @@ public class Container : BaseEntity
     public Container(int containerId, int qty)
     {
         ContainerId = containerId;
-        Qty = qty > 0 ? qty : throw new ContainerZeroException();
+        Qty = qty > 0 ? qty : throw new ContainerQtyZeroException();
     }
     public int ContainerId { get; set; }
 

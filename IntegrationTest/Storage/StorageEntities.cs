@@ -1,4 +1,3 @@
-using Microsoft.Data.Sqlite;
 using Shouldly;
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
@@ -115,7 +114,7 @@ public class StorageEntities
         WarehouseDbContext dbContext = new DbContextTest().ContextTest;
         dbContext.Database.EnsureCreated();
         // Act & Assert
-        Should.Throw<ContainerZeroException>(() => dbContext.Articles.Add(new Article("Laptop")
+        Should.Throw<ContainerQtyZeroException>(() => dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
             {
