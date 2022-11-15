@@ -5,7 +5,7 @@ namespace WarehouseCore.Entities.Unities;
 
 public class Heaviness : CodeEntity
 {
-    public Heaviness(double weight)
+    public Heaviness(string codeId, double weight) : base(codeId)
     {
         Weight = weight;
     }
