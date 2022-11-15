@@ -1,6 +1,6 @@
 using WarehouseCore.Entities.Product;
 
-namespace WarehouseApp.Interfaces;
+namespace WarehouseApp.InterfacesStorage;
 
 public interface IArticleCreate
 {

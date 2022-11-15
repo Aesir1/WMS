@@ -1,6 +1,6 @@
 using WarehouseCore.Entities.Storage;
 
-namespace WarehouseApp.Interfaces;
+namespace WarehouseApp.InterfacesStorage;
 
 public interface IAddressCreate
 {

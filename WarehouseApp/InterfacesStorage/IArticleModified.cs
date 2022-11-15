@@ -1,7 +1,7 @@
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Unities;
 
-namespace WarehouseApp.Interfaces;
+namespace WarehouseApp.InterfacesStorage;
 
 public interface IArticleModified
 {

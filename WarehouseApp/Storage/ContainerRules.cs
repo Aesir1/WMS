@@ -1,4 +1,4 @@
-using WarehouseApp.Interfaces;
+using WarehouseApp.InterfacesStorage;
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
 using WarehouseCore.Exceptions;

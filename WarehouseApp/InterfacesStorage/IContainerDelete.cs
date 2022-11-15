@@ -1,4 +1,4 @@
-namespace WarehouseApp.Interfaces;
+namespace WarehouseApp.InterfacesStorage;
 
 public interface IContainerDelete
 {
