@@ -3,7 +3,6 @@ using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
 using WarehouseCore.Exceptions;
 using WarehouseInfrastructure.Contexts;
-using Xunit;
 
 namespace IntegrationTest.Storage;
 
@@ -11,7 +10,7 @@ public class ContainerRulesTest : IContainerRulesTest
 {
     public Container Create(int id, int qty, Article article, Address address)
     {
-        WarehouseDbContext _context = new DbContextTest().ContextTest;
+        WarehouseDbContext context = new DbContextTest();
         Container container = new Container(id, qty)
         {
             Article = article,
@@ -20,8 +19,8 @@ public class ContainerRulesTest : IContainerRulesTest
         try
         {
             // possible double container id reference
-            _context.Containers.Add(container);
-            _context.SaveChanges();
+            context.Containers.Add(container);
+            context.SaveChanges();
         }
         catch (ContainerIdMatch containerIdMatch)
         {
@@ -38,8 +37,8 @@ public class ContainerRulesTest : IContainerRulesTest
     }
     public Container Modified(int id, int qty, Address? address = default, Article? article = default)
     {
-        WarehouseDbContext _context = new DbContextTest().ContextTest;
-        Container? container = _context.Containers.First(c => c.ContainerId == id);
+        WarehouseDbContext context = new DbContextTest();
+        Container? container = context.Containers.First(c => c.ContainerId == id);
         if (container == null)
         {
             throw new ContainerIdMissing();
@@ -51,14 +50,14 @@ public class ContainerRulesTest : IContainerRulesTest
         container.Qty = qty;
         container.Address = address ?? container.Address;
         container.Article = article ?? container.Article;
-        _context.SaveChanges();
+        context.SaveChanges();
         return container;
     }
 
     public bool Delete(int id)
     {
-        WarehouseDbContext _context = new DbContextTest().ContextTest;
-        Container? container = _context.Containers.First(c => c.ContainerId == id);
+        WarehouseDbContext context = new DbContextTest();
+        Container? container = context.Containers.First(c => c.ContainerId == id);
         if (container == null)
         {
             throw new ContainerIdMissing();
@@ -66,8 +65,8 @@ public class ContainerRulesTest : IContainerRulesTest
 
         try
         {
-            _context.Containers.Remove(container);
-            _context.SaveChanges();
+            context.Containers.Remove(container);
+            context.SaveChanges();
             return true;
         }
         catch (Exception ex)

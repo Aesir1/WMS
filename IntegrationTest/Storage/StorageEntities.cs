@@ -13,7 +13,7 @@ public class StorageEntities
     public void StorageRelatedEntitiesAreCreated()
     {
         // Arrange
-        WarehouseDbContext dbContext = new DbContextTest().ContextTest;
+        WarehouseDbContext dbContext = new DbContextTest();
 
         dbContext.Articles.Add(new Article("Laptop")
         {
@@ -44,7 +44,7 @@ public class StorageEntities
     public void ArticleAndContainerAreDeleted()
     {
         // Arrange
-        WarehouseDbContext dbContext = new DbContextTest().ContextTest;
+        WarehouseDbContext dbContext = new DbContextTest();
         dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
@@ -61,6 +61,8 @@ public class StorageEntities
         });
         dbContext.SaveChanges();
         // Act
+        var containerToDelete = dbContext.Containers.First();
+        dbContext.Containers.Remove(containerToDelete);
         var articleToDelete = dbContext.Articles.First();
         dbContext.Articles.Remove(articleToDelete);
         dbContext.SaveChanges();
@@ -73,12 +75,11 @@ public class StorageEntities
     }
     
     [Fact]
-    public void AddressAreNotDeletedAfterArticleDeleted()
+    public void AddressPersistenceAfterArticleAndContainerDeleted()
     {
         // Arrange
-        WarehouseDbContext dbContext = new DbContextTest().ContextTest;
-        dbContext.Database.EnsureCreated();
-    
+        WarehouseDbContext dbContext = new DbContextTest();
+
         dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
@@ -95,6 +96,8 @@ public class StorageEntities
         });
         dbContext.SaveChanges();
         // Act
+        var containerToDelete = dbContext.Containers.First();
+        dbContext.Containers.Remove(containerToDelete);
         var articleToDelete = dbContext.Articles.First();
         dbContext.Articles.Remove(articleToDelete);
         dbContext.SaveChanges();
@@ -106,13 +109,45 @@ public class StorageEntities
         address.Count.ShouldBe(1);
         container.Count.ShouldBe(0);
     }
-    
+
+    [Fact]
+    public void ContainerDeleted()
+    {
+        // Arrange
+        WarehouseDbContext dbContext = new DbContextTest();
+
+        dbContext.Articles.Add(new Article("Laptop")
+        {
+            Containers = new List<Container>
+            {
+                new(1111, 5)
+                {
+                    Address = new Address
+                    {
+                        CodeId = "STR1",
+                        Description = "Wertarticle"
+                    }
+                }
+            }
+        });
+        dbContext.SaveChanges();
+        // Act
+        var containerToDelete = dbContext.Containers.First();
+        dbContext.Containers.Remove(containerToDelete);
+        dbContext.SaveChanges();
+        var article = dbContext.Articles.ToList();
+        var address = dbContext.Addresses.ToList();
+        var container = dbContext.Containers.ToList();
+        // Assert
+        article.Count.ShouldBe(1);
+        address.Count.ShouldBe(1);
+        container.Count.ShouldBe(0);
+    }
     [Fact]
     public void ContainerNotCreatedWhenQtyZero()
     {
         // Arrange
-        WarehouseDbContext dbContext = new DbContextTest().ContextTest;
-        dbContext.Database.EnsureCreated();
+        WarehouseDbContext dbContext = new DbContextTest();
         // Act & Assert
         Should.Throw<ContainerQtyZeroException>(() => dbContext.Articles.Add(new Article("Laptop")
         {
