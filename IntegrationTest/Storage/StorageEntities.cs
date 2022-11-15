@@ -15,15 +15,14 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article("Laptop")
+        dbContext.Articles.Add(new Article(1,"Laptop")
         {
             Containers = new List<Container>
             {
                 new(1111, 5)
                 {
-                    Address = new Address
+                    Address = new Address("STRA1")
                     {
-                        CodeId = "STR1",
                         Description = "Wertarticle"
                     }
                 }
@@ -45,15 +44,14 @@ public class StorageEntities
     {
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
-        dbContext.Articles.Add(new Article("Laptop")
+        dbContext.Articles.Add(new Article(1,"Laptop")
         {
             Containers = new List<Container>
             {
                 new(1111, 5)
                 {
-                    Address = new Address
+                    Address = new Address("STRA1")
                     {
-                        CodeId = "STR1",
                         Description = "Wertarticle"
                     }
                 }
@@ -67,7 +65,6 @@ public class StorageEntities
         dbContext.Articles.Remove(articleToDelete);
         dbContext.SaveChanges();
         var article = dbContext.Articles.ToList();
-        var address = dbContext.Addresses.ToList();
         var container = dbContext.Containers.ToList();
         // Assert
         article.Count.ShouldBe(0);
@@ -80,15 +77,14 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article("Laptop")
+        dbContext.Articles.Add(new Article(1, "Laptop")
         {
             Containers = new List<Container>
             {
                 new(1111, 5)
                 {
-                    Address = new Address
+                    Address = new Address("STRA1")
                     {
-                        CodeId = "STR1",
                         Description = "Wertarticle"
                     }
                 }
@@ -116,15 +112,14 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article("Laptop")
+        dbContext.Articles.Add(new Article(1, "Laptop")
         {
             Containers = new List<Container>
             {
                 new(1111, 5)
                 {
-                    Address = new Address
+                    Address = new Address("STRA1")
                     {
-                        CodeId = "STR1",
                         Description = "Wertarticle"
                     }
                 }
@@ -149,15 +144,14 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
         // Act & Assert
-        Should.Throw<ContainerQtyZeroException>(() => dbContext.Articles.Add(new Article("Laptop")
+        Should.Throw<ContainerQtyZeroException>(() => dbContext.Articles.Add(new Article(1, "Laptop")
         {
             Containers = new List<Container>
             {
                 new(1111, 0)
                 {
-                    Address = new Address
+                    Address = new Address("STRA1")
                     {
-                        CodeId = "STR1",
                         Description = "Wertarticle"
                     }
                 }

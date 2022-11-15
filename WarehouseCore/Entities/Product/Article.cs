@@ -5,9 +5,9 @@ using WarehouseCore.Interfaces;
 
 namespace WarehouseCore.Entities.Product;
 
-public class Article : GuidEntity, IAttachableToContainer
+public class Article : IdEntity, IAttachableToContainer
 {
-    public Article(string name)
+    public Article(int id, string name) : base(id)
     {
         Name = name;
     }

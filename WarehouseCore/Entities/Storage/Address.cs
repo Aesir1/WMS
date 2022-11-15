@@ -9,4 +9,8 @@ namespace WarehouseCore.Entities.Storage;
 public class Address : CodeEntity, IAttachableToContainer
 {
     public ICollection<Container> Containers { get; set; }
+
+    public Address(string codeId) : base(codeId)
+    {
+    }
 }

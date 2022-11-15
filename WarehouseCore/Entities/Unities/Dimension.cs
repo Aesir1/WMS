@@ -5,7 +5,7 @@ namespace WarehouseCore.Entities.Unities;
 
 public class Dimension : CodeEntity
 {
-    public Dimension(decimal length, decimal width)
+    public Dimension(string codeId, decimal length, decimal width) : base(codeId)
     {
         Length = length;
         Width = width;

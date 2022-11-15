@@ -12,9 +12,9 @@ public class StorageRules
     public void ContainerCreate()
     {
         // Arrange
-        IContainerRulesTest containerRulesTest = new ContainerRulesTest();
+        IContainerCreateTest containerCreateTest = new ContainerRulesTest();
         // Act
-        var container = containerRulesTest.Create(111, 1, new Article("Coco"), new Address { CodeId = "STRA1" });
+        var container = containerCreateTest.Create(111, 1, new Article(1, "Coco"), new Address("STRA1") );
         //Assert
         container.ContainerId.ShouldBe(111);
     }
@@ -23,12 +23,10 @@ public class StorageRules
     public void ContainerDelete()
     {
         // Arrange
-        IContainerRulesTest containerRulesTest = new ContainerRulesTest();
+        IContainerDeleteTest containerCreateTest = new ContainerRulesTest();
         // Act
-        var container = containerRulesTest.Create(111, 1, new Article("Coco"), new Address { CodeId = "STRA1" });
         //Assert
-        container.ContainerId.ShouldBe(111);
-        bool containerState = containerRulesTest.Delete(111);
+        bool containerState = containerCreateTest.Delete(111);
         containerState.ShouldBeTrue();
     }
 }

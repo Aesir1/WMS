@@ -4,9 +4,9 @@ using WarehouseCore.Enums;
 
 namespace WarehouseCore.Entities.TransitEntities;
 
-public abstract class TransitBase : GuidEntity
+public abstract class TransitBase : IdEntity
 {
-    protected TransitBase(Address address, TransitLabel transitLabel)
+    protected TransitBase(int id, Address address, TransitLabel transitLabel) : base(id)
     {
         Address = address;
         TransitLabel = transitLabel;

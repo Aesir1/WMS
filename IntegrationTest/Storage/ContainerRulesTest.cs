@@ -6,7 +6,7 @@ using WarehouseInfrastructure.Contexts;
 
 namespace IntegrationTest.Storage;
 
-public class ContainerRulesTest : IContainerRulesTest
+public class ContainerRulesTest : IContainerCreateTest, IContainerDeleteTest
 {
     public Container Create(int id, int qty, Article article, Address address)
     {

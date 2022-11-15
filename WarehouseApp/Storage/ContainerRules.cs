@@ -4,9 +4,9 @@ using WarehouseCore.Entities.Storage;
 using WarehouseCore.Exceptions;
 using WarehouseInfrastructure.Contexts;
 
-namespace WarehouseApp.StorageRules;
+namespace WarehouseApp.Storage;
 
-public class ContainerRules : IContainerRules
+public class ContainerRules : IContainerCreate, IContainerModified, IContainerDelete
 {
     private readonly WarehouseDbContext _context;
 
