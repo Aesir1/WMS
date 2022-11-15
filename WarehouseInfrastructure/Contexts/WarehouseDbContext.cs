@@ -34,7 +34,7 @@ public class WarehouseDbContext : DbContext
         modelBuilder.Entity<Heaviness>().HasKey(h => h.CodeId);
         // --Users -- Permissions -- Departments
         modelBuilder.Entity<User>().HasKey(u => u.Id);
-        modelBuilder.Entity<UserInfo>().HasKey(ui => ui.UserId);
+        modelBuilder.Entity<UserInfo>().HasKey(ui => ui.Id);
         modelBuilder.Entity<Department>().HasKey(d => d.Id);
         modelBuilder.Entity<Permission>().HasKey(p => p.Id);
         

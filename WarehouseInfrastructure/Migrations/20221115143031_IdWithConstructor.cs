@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WarehouseInfrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class ContextInjection : Migration
+    public partial class IdWithConstructor : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,14 +29,15 @@ namespace WarehouseInfrastructure.Migrations
                 name: "Departments",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Departments", x => x.Guid);
+                    table.PrimaryKey("PK_Departments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,7 +75,8 @@ namespace WarehouseInfrastructure.Migrations
                 name: "Permissions",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserManager = table.Column<bool>(type: "bit", nullable: false),
                     Delete = table.Column<bool>(type: "bit", nullable: false),
                     Modified = table.Column<bool>(type: "bit", nullable: false),
@@ -85,30 +87,34 @@ namespace WarehouseInfrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Permissions", x => x.Guid);
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "UserInfos",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nr = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PostalCode = table.Column<int>(type: "int", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserInfos", x => x.UserId);
+                    table.PrimaryKey("PK_UserInfos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Articles",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DimensionCodeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     HeavinessCodeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
@@ -117,7 +123,7 @@ namespace WarehouseInfrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Articles", x => x.Guid);
+                    table.PrimaryKey("PK_Articles", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Articles_Dimensions_DimensionCodeId",
                         column: x => x.DimensionCodeId,
@@ -134,27 +140,27 @@ namespace WarehouseInfrastructure.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PermissionGuid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PermissionId = table.Column<int>(type: "int", nullable: false),
                     DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Guid);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Permissions_PermissionGuid",
-                        column: x => x.PermissionGuid,
+                        name: "FK_Users_Permissions_PermissionId",
+                        column: x => x.PermissionId,
                         principalTable: "Permissions",
-                        principalColumn: "Guid",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Users_UserInfos_Guid",
-                        column: x => x.Guid,
+                        name: "FK_Users_UserInfos_Id",
+                        column: x => x.Id,
                         principalTable: "UserInfos",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -166,7 +172,7 @@ namespace WarehouseInfrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Qty = table.Column<int>(type: "int", nullable: false),
                     AddressCodeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ArticleGuid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ArticleId = table.Column<int>(type: "int", nullable: false),
                     DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -177,37 +183,35 @@ namespace WarehouseInfrastructure.Migrations
                         name: "FK_Containers_Addresses_AddressCodeId",
                         column: x => x.AddressCodeId,
                         principalTable: "Addresses",
-                        principalColumn: "CodeId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CodeId");
                     table.ForeignKey(
-                        name: "FK_Containers_Articles_ArticleGuid",
-                        column: x => x.ArticleGuid,
+                        name: "FK_Containers_Articles_ArticleId",
+                        column: x => x.ArticleId,
                         principalTable: "Articles",
-                        principalColumn: "Guid",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "DepartmentUser",
                 columns: table => new
                 {
-                    DepartmentsGuid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UsersGuid = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    DepartmentsId = table.Column<int>(type: "int", nullable: false),
+                    UsersId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DepartmentUser", x => new { x.DepartmentsGuid, x.UsersGuid });
+                    table.PrimaryKey("PK_DepartmentUser", x => new { x.DepartmentsId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_DepartmentUser_Departments_DepartmentsGuid",
-                        column: x => x.DepartmentsGuid,
+                        name: "FK_DepartmentUser_Departments_DepartmentsId",
+                        column: x => x.DepartmentsId,
                         principalTable: "Departments",
-                        principalColumn: "Guid",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DepartmentUser_Users_UsersGuid",
-                        column: x => x.UsersGuid,
+                        name: "FK_DepartmentUser_Users_UsersId",
+                        column: x => x.UsersId,
                         principalTable: "Users",
-                        principalColumn: "Guid",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -227,19 +231,19 @@ namespace WarehouseInfrastructure.Migrations
                 column: "AddressCodeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Containers_ArticleGuid",
+                name: "IX_Containers_ArticleId",
                 table: "Containers",
-                column: "ArticleGuid");
+                column: "ArticleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DepartmentUser_UsersGuid",
+                name: "IX_DepartmentUser_UsersId",
                 table: "DepartmentUser",
-                column: "UsersGuid");
+                column: "UsersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_PermissionGuid",
+                name: "IX_Users_PermissionId",
                 table: "Users",
-                column: "PermissionGuid");
+                column: "PermissionId");
         }
 
         /// <inheritdoc />
