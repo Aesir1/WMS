@@ -21,4 +21,8 @@
       <ProjectReference Include="..\WarehouseInfrastructure\WarehouseInfrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="InterfacesUser" />
+    </ItemGroup>
+
 </Project>

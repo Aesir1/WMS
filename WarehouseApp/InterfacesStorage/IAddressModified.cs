@@ -4,5 +4,5 @@ namespace WarehouseApp.InterfacesStorage;
 
 public interface IAddressModified
 {
-    Address Modified(string codeId, string? description = default);
+    Address Modified(string codeId, string? description = default, ICollection<Container>? containers = default);
 }

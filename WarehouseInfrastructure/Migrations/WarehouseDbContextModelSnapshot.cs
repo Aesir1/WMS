@@ -34,7 +34,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("DepartmentUser");
+                    b.ToTable("DepartmentUser", (string)null);
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Organisation.Department", b =>
@@ -57,7 +57,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Organisation.Permission", b =>
@@ -91,7 +91,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permissions");
+                    b.ToTable("Permissions", (string)null);
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Product.Article", b =>
@@ -124,7 +124,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasIndex("HeavinessCodeId");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Articles", (string)null);
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Storage.Address", b =>
@@ -143,7 +143,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("CodeId");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Storage.Container", b =>
@@ -176,7 +176,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasIndex("ArticleId");
 
-                    b.ToTable("Containers");
+                    b.ToTable("Containers", (string)null);
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Unities.Dimension", b =>
@@ -203,7 +203,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("CodeId");
 
-                    b.ToTable("Dimensions");
+                    b.ToTable("Dimensions", (string)null);
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Unities.Heaviness", b =>
@@ -225,7 +225,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("CodeId");
 
-                    b.ToTable("Heavinesses");
+                    b.ToTable("Heavinesses", (string)null);
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.User.User", b =>
@@ -254,7 +254,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.User.UserInfo", b =>
@@ -292,7 +292,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserInfos");
+                    b.ToTable("UserInfos", (string)null);
                 });
 
             modelBuilder.Entity("DepartmentUser", b =>

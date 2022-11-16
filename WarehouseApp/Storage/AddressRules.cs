@@ -13,10 +13,12 @@ public class AddressRules : IAddressCreate, IAddressModified, IAddressDelete
         _context = context;
     }
     
-    public Address Create(string codeId, string? description = default)
+    public Address Create(string codeId, ICollection<Container>? containers,
+        string? description = default)
     {
         Address address = new (codeId)
         {
+            Containers = containers,
             Description = description
         };
         try
@@ -34,19 +36,20 @@ public class AddressRules : IAddressCreate, IAddressModified, IAddressDelete
         return address;
     }
     
-    public Address Modified(string codeId, string? description = default)
+    public Address Modified(string codeId, string? description = default, ICollection<Container>? containers = default)
     {
         Address? address = _context.Addresses.First(c => c.CodeId == codeId);
         if (address == null)
         {
             throw new ($"address id doesn't exists: {codeId}");
         }
-        if (description == default)
+        if (description == default && containers == default)
         {
             throw new ("there's nothing here to update");
         }
         
         address.Description = description;
+        // ToDo Containers collections need to be handle
         _context.SaveChanges();
         return address;
     }

@@ -4,5 +4,5 @@ namespace WarehouseApp.InterfacesStorage;
 
 public interface IAddressCreate
 {
-    Address Create(string codeId, string? description = default);
+    Address Create(string codeId, ICollection<Container>? containers,string? description = default);
 }
