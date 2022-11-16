@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="InterfacesUser" />
+      <Folder Include="Exceptions" />
     </ItemGroup>
 
 </Project>

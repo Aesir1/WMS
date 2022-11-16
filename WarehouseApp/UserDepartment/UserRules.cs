@@ -2,7 +2,7 @@ using WarehouseCore.Entities.Organisation;
 using WarehouseCore.Entities.User;
 using WarehouseInfrastructure.Contexts;
 
-namespace WarehouseApp.UserManagement;
+namespace WarehouseApp.UserDepartment;
 
 public class UserRules
 {
@@ -38,7 +38,7 @@ public class UserRules
         return user;
     }
 
-    public User Modified(int id, string? email = default, string password = default, Permission permission = default,
+    public User Modified(int id, string? email = default, string? password = default, Permission? permission = default,
         UserInfo? userInfo = default)
     {
         var user = _context.Users.First(c => c.Id == id);
