@@ -10,8 +10,4 @@ public class Permission : IdEntity
     public bool Create { get; set; }
     public bool Read { get; set; }
     public ICollection<User.User> Users { get; set; }
-
-    public Permission(int id) : base(id)
-    {
-    }
 }

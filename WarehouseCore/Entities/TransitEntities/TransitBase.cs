@@ -6,7 +6,7 @@ namespace WarehouseCore.Entities.TransitEntities;
 
 public abstract class TransitBase : IdEntity
 {
-    protected TransitBase(int id, Address address, TransitLabel transitLabel) : base(id)
+    protected TransitBase(Address address, TransitLabel transitLabel)
     {
         Address = address;
         TransitLabel = transitLabel;

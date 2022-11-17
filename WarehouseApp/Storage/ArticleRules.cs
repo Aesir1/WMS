@@ -17,7 +17,7 @@ public class ArticleRules : IArticleCreate, IArticleModified, IArticleDelete
 
     public Article Create(int id, string name, ICollection<Container> containers)
     {
-        Article article = new(id, name) { Containers = containers };
+        Article article = new(name) { Containers = containers };
         try
         {
             // ToDo possible double address id reference specific implementations required  

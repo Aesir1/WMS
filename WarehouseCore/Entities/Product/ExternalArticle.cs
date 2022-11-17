@@ -4,7 +4,7 @@ namespace WarehouseCore.Entities.Product;
 
 public class ExternalArticle : IdEntity
 {
-    public ExternalArticle(int id, string isbn) : base(id)
+    public ExternalArticle(string isbn)
     {
         ISBN = isbn;
     }

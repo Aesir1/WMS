@@ -5,6 +5,6 @@ namespace WarehouseApp.InterfacesUser;
 
 public interface IUserCreate
 {
-    User Create(int id, string email, string password,
+    User Create(string email, string password,
         ICollection<Department> departments, Permission permission, UserInfo? userInfo = default);
 }

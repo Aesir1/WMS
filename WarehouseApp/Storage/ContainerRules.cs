@@ -15,9 +15,9 @@ public class ContainerRules : IContainerCreate, IContainerModified, IContainerDe
         _context = warehouseDbContext;
     }
 
-    public Container Create(int id, int qty, Article article, Address address)
+    public Container Create(int qty, Article article, Address address)
     {
-        Container container = new Container(id, qty)
+        Container container = new Container(qty)
         {
             Article = article,
             Address = address
@@ -43,7 +43,7 @@ public class ContainerRules : IContainerCreate, IContainerModified, IContainerDe
     }
     public Container Modified(int id, int qty, Address? address = default, Article? article = default)
     {
-        Container? container = _context.Containers.First(c => c.ContainerId == id);
+        Container? container = _context.Containers.First(c => c.Id == id);
         if (container == null)
         {
             throw new ContainerIdMissing();
@@ -61,7 +61,7 @@ public class ContainerRules : IContainerCreate, IContainerModified, IContainerDe
 
     public bool Delete(int id)
     {
-        Container? container = _context.Containers.First(c => c.ContainerId == id);
+        Container? container = _context.Containers.First(c => c.Id == id);
         if (container == null)
         {
             throw new ContainerIdMissing();

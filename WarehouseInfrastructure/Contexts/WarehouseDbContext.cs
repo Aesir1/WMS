@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using WarehouseCore.Entities.AbstractEntities;
 using WarehouseCore.Entities.Organisation;
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
@@ -28,10 +30,10 @@ public class WarehouseDbContext : DbContext
     {
         // Storage
         modelBuilder.Entity<Article>().HasKey(a => a.Id);
-        modelBuilder.Entity<Container>().HasKey(c => c.ContainerId);
+        modelBuilder.Entity<Container>().HasKey(c => c.Id);
         modelBuilder.Entity<Address>().HasKey(ad => ad.CodeId);
-        modelBuilder.Entity<Dimension>().HasKey(d => d.CodeId);
-        modelBuilder.Entity<Heaviness>().HasKey(h => h.CodeId);
+        modelBuilder.Entity<Dimension>().HasKey(d => d.ArticleId);
+        modelBuilder.Entity<Heaviness>().HasKey(h => h.ArticleId);
         // --Users -- Permissions -- Departments
         modelBuilder.Entity<User>().HasKey(u => u.Id);
         modelBuilder.Entity<UserInfo>().HasKey(ui => ui.Id);
@@ -44,6 +46,10 @@ public class WarehouseDbContext : DbContext
         //     .OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<Address>().IsConnectedWithContainer(c => c.Address);
         modelBuilder.Entity<Article>().IsConnectedWithContainer(a => a.Article);
+        modelBuilder.Entity<Article>().HasOne(a => a.Dimension).WithOne(d => d.Article)
+            .HasForeignKey<Article>(a => a.Id);
+        modelBuilder.Entity<Article>().HasOne(a => a.Heaviness).WithOne(h => h.Article)
+            .HasForeignKey<Article>(a => a.Id);
 
         modelBuilder.Entity<User>().HasOne(e => e.UserInfo).WithOne(ui => ui.User).HasForeignKey<User>(ui => ui.Id);
         modelBuilder.Entity<User>().HasOne(u => u.Permission).WithMany(p => p.Users);
@@ -54,6 +60,20 @@ public class WarehouseDbContext : DbContext
     {
         modelConfigurationBuilder.Properties<decimal>().HavePrecision(9, 4);
     }
-    
-    
+
+    public override int SaveChanges(bool acceptAllChangesOnSuccess)
+    {
+        SetDateTimeUpdatedForModifiedEntities();
+        return base.SaveChanges(acceptAllChangesOnSuccess);
+    }
+
+    private void SetDateTimeUpdatedForModifiedEntities()
+    {
+        IEnumerable<EntityEntry<BaseEntity>> entries =
+            ChangeTracker.Entries<BaseEntity>().Where(e => e.State == EntityState.Modified);
+        foreach (EntityEntry<BaseEntity> entry in entries)
+        {
+            entry.Entity.DateTimeUpdated = DateTime.Now;
+        }
+    }
 }

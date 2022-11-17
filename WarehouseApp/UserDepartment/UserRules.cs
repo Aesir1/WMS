@@ -1,10 +1,11 @@
+using WarehouseApp.InterfacesUser;
 using WarehouseCore.Entities.Organisation;
 using WarehouseCore.Entities.User;
 using WarehouseInfrastructure.Contexts;
 
 namespace WarehouseApp.UserDepartment;
 
-public class UserRules
+public class UserRules : IUserCreate, IUserModified, IUserDelete
 {
     private readonly WarehouseDbContext _context;
 
@@ -13,10 +14,10 @@ public class UserRules
         _context = context;
     }
 
-    public User Create(int id, string email, string password,
+    public User Create(string email, string password,
         ICollection<Department> departments, Permission permission, UserInfo? userInfo = default)
     {
-        User user = new(id)
+        User user = new()
         {
             Email = email,
             Password = password,

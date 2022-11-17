@@ -13,5 +13,6 @@ public class Dimension : CodeEntity
 
     public decimal Length { get; set; }
     public decimal Width { get; set; }
-    public ICollection<Article> Articles { get; set; }
+    public int ArticleId { get; set; }
+    public Article Article { get; set; }
 }

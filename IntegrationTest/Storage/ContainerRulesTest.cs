@@ -8,10 +8,10 @@ namespace IntegrationTest.Storage;
 
 public class ContainerRulesTest : IContainerCreateTest, IContainerDeleteTest
 {
-    public Container Create(int id, int qty, Article article, Address address)
+    public Container Create(int qty, Article article, Address address)
     {
         WarehouseDbContext context = new DbContextTest();
-        Container container = new Container(id, qty)
+        Container container = new Container(qty)
         {
             Article = article,
             Address = address
@@ -38,7 +38,7 @@ public class ContainerRulesTest : IContainerCreateTest, IContainerDeleteTest
     public Container Modified(int id, int qty, Address? address = default, Article? article = default)
     {
         WarehouseDbContext context = new DbContextTest();
-        Container? container = context.Containers.First(c => c.ContainerId == id);
+        Container? container = context.Containers.First(c => c.Id == id);
         if (container == null)
         {
             throw new ContainerIdMissing();
@@ -57,7 +57,7 @@ public class ContainerRulesTest : IContainerCreateTest, IContainerDeleteTest
     public bool Delete(int id)
     {
         WarehouseDbContext context = new DbContextTest();
-        Container? container = context.Containers.First(c => c.ContainerId == id);
+        Container? container = context.Containers.First(c => c.Id == id);
         if (container == null)
         {
             throw new ContainerIdMissing();

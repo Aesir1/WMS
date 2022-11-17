@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WarehouseInfrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class IdWithConstructor : Migration
+    public partial class DbStructureArtUnities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,31 +44,35 @@ namespace WarehouseInfrastructure.Migrations
                 name: "Dimensions",
                 columns: table => new
                 {
-                    CodeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ArticleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Length = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: false),
                     Width = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: false),
                     DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CodeId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dimensions", x => x.CodeId);
+                    table.PrimaryKey("PK_Dimensions", x => x.ArticleId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Heavinesses",
                 columns: table => new
                 {
-                    CodeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ArticleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Weight = table.Column<double>(type: "float", nullable: false),
                     DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CodeId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Heavinesses", x => x.CodeId);
+                    table.PrimaryKey("PK_Heavinesses", x => x.ArticleId);
                 });
 
             migrationBuilder.CreateTable(
@@ -113,11 +117,8 @@ namespace WarehouseInfrastructure.Migrations
                 name: "Articles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DimensionCodeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    HeavinessCodeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -125,15 +126,17 @@ namespace WarehouseInfrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Articles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Articles_Dimensions_DimensionCodeId",
-                        column: x => x.DimensionCodeId,
+                        name: "FK_Articles_Dimensions_Id",
+                        column: x => x.Id,
                         principalTable: "Dimensions",
-                        principalColumn: "CodeId");
+                        principalColumn: "ArticleId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Articles_Heavinesses_HeavinessCodeId",
-                        column: x => x.HeavinessCodeId,
+                        name: "FK_Articles_Heavinesses_Id",
+                        column: x => x.Id,
                         principalTable: "Heavinesses",
-                        principalColumn: "CodeId");
+                        principalColumn: "ArticleId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,7 +171,7 @@ namespace WarehouseInfrastructure.Migrations
                 name: "Containers",
                 columns: table => new
                 {
-                    ContainerId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Qty = table.Column<int>(type: "int", nullable: false),
                     AddressCodeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -178,7 +181,7 @@ namespace WarehouseInfrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Containers", x => x.ContainerId);
+                    table.PrimaryKey("PK_Containers", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Containers_Addresses_AddressCodeId",
                         column: x => x.AddressCodeId,
@@ -214,16 +217,6 @@ namespace WarehouseInfrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Articles_DimensionCodeId",
-                table: "Articles",
-                column: "DimensionCodeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Articles_HeavinessCodeId",
-                table: "Articles",
-                column: "HeavinessCodeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Containers_AddressCodeId",

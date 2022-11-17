@@ -11,5 +11,6 @@ public class Heaviness : CodeEntity
     }
 
     public double Weight { get; set; }
-    public ICollection<Article> Articles { get; set; }
+    public int ArticleId { get; set; }
+    public Article Article { get; set; }
 }

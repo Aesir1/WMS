@@ -15,11 +15,11 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article(1,"Laptop")
+        dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
             {
-                new(1111, 5)
+                new(5)
                 {
                     Address = new Address("STRA1")
                     {
@@ -44,11 +44,11 @@ public class StorageEntities
     {
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
-        dbContext.Articles.Add(new Article(1,"Laptop")
+        dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
             {
-                new(1111, 5)
+                new(5)
                 {
                     Address = new Address("STRA1")
                     {
@@ -77,11 +77,11 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article(1, "Laptop")
+        dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
             {
-                new(1111, 5)
+                new(5)
                 {
                     Address = new Address("STRA1")
                     {
@@ -112,11 +112,11 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article(1, "Laptop")
+        dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
             {
-                new(1111, 5)
+                new(5)
                 {
                     Address = new Address("STRA1")
                     {
@@ -144,11 +144,11 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
         // Act & Assert
-        Should.Throw<ContainerQtyZeroException>(() => dbContext.Articles.Add(new Article(1, "Laptop")
+        Should.Throw<ContainerQtyZeroException>(() => dbContext.Articles.Add(new Article("Laptop")
         {
             Containers = new List<Container>
             {
-                new(1111, 0)
+                new(0)
                 {
                     Address = new Address("STRA1")
                     {

@@ -34,7 +34,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("DepartmentUser", (string)null);
+                    b.ToTable("DepartmentUser");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Organisation.Department", b =>
@@ -57,7 +57,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Organisation.Permission", b =>
@@ -91,16 +91,13 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permissions", (string)null);
+                    b.ToTable("Permissions");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Product.Article", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateTimeCreated")
                         .HasColumnType("datetime2");
@@ -108,23 +105,13 @@ namespace WarehouseInfrastructure.Migrations
                     b.Property<DateTime>("DateTimeUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DimensionCodeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("HeavinessCodeId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DimensionCodeId");
-
-                    b.HasIndex("HeavinessCodeId");
-
-                    b.ToTable("Articles", (string)null);
+                    b.ToTable("Articles");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Storage.Address", b =>
@@ -143,16 +130,16 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("CodeId");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Storage.Container", b =>
                 {
-                    b.Property<int>("ContainerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContainerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AddressCodeId")
                         .IsRequired()
@@ -170,19 +157,26 @@ namespace WarehouseInfrastructure.Migrations
                     b.Property<int>("Qty")
                         .HasColumnType("int");
 
-                    b.HasKey("ContainerId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AddressCodeId");
 
                     b.HasIndex("ArticleId");
 
-                    b.ToTable("Containers", (string)null);
+                    b.ToTable("Containers");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Unities.Dimension", b =>
                 {
+                    b.Property<int>("ArticleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleId"));
+
                     b.Property<string>("CodeId")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateTimeCreated")
                         .HasColumnType("datetime2");
@@ -201,15 +195,22 @@ namespace WarehouseInfrastructure.Migrations
                         .HasPrecision(9, 4)
                         .HasColumnType("decimal(9,4)");
 
-                    b.HasKey("CodeId");
+                    b.HasKey("ArticleId");
 
-                    b.ToTable("Dimensions", (string)null);
+                    b.ToTable("Dimensions");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Unities.Heaviness", b =>
                 {
+                    b.Property<int>("ArticleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleId"));
+
                     b.Property<string>("CodeId")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateTimeCreated")
                         .HasColumnType("datetime2");
@@ -223,9 +224,9 @@ namespace WarehouseInfrastructure.Migrations
                     b.Property<double>("Weight")
                         .HasColumnType("float");
 
-                    b.HasKey("CodeId");
+                    b.HasKey("ArticleId");
 
-                    b.ToTable("Heavinesses", (string)null);
+                    b.ToTable("Heavinesses");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.User.User", b =>
@@ -254,7 +255,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.User.UserInfo", b =>
@@ -292,7 +293,7 @@ namespace WarehouseInfrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserInfos", (string)null);
+                    b.ToTable("UserInfos");
                 });
 
             modelBuilder.Entity("DepartmentUser", b =>
@@ -313,12 +314,16 @@ namespace WarehouseInfrastructure.Migrations
             modelBuilder.Entity("WarehouseCore.Entities.Product.Article", b =>
                 {
                     b.HasOne("WarehouseCore.Entities.Unities.Dimension", "Dimension")
-                        .WithMany("Articles")
-                        .HasForeignKey("DimensionCodeId");
+                        .WithOne("Article")
+                        .HasForeignKey("WarehouseCore.Entities.Product.Article", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WarehouseCore.Entities.Unities.Heaviness", "Heaviness")
-                        .WithMany("Articles")
-                        .HasForeignKey("HeavinessCodeId");
+                        .WithOne("Article")
+                        .HasForeignKey("WarehouseCore.Entities.Product.Article", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Dimension");
 
@@ -380,12 +385,14 @@ namespace WarehouseInfrastructure.Migrations
 
             modelBuilder.Entity("WarehouseCore.Entities.Unities.Dimension", b =>
                 {
-                    b.Navigation("Articles");
+                    b.Navigation("Article")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.Unities.Heaviness", b =>
                 {
-                    b.Navigation("Articles");
+                    b.Navigation("Article")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.User.UserInfo", b =>
