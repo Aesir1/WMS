@@ -7,8 +7,9 @@ namespace WarehouseCore.Entities.Product;
 
 public class Article : IdEntity, IAttachableToContainer
 {
-    public Article(string name)
+    public Article(int id, string name)
     {
+        Id = id;
         Name = name;
     }
 

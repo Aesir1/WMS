@@ -1,4 +1,4 @@
-using WarehouseApp.InterfacesStorage;
+using WarehouseApp.Interfaces;
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
 using WarehouseCore.Exceptions;
@@ -6,7 +6,7 @@ using WarehouseInfrastructure.Contexts;
 
 namespace WarehouseApp.Storage;
 
-public class ContainerRules : IContainerCreate, IContainerModified, IContainerDelete
+public class ContainerRules : IContainerRules
 {
     private readonly WarehouseDbContext _context;
 

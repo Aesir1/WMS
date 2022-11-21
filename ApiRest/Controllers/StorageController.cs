@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using WarehouseApp.InterfacesStorage;
+using WarehouseApp.Interfaces;
 using WarehouseApp.Storage;
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
@@ -25,9 +25,9 @@ public class StorageController : Controller
     [Route("api/[controller]/createContainer")]
     public IActionResult CreateContainer()
     {
-        IContainerCreate containerCreate = new ContainerRules(_context);
+        IContainerRules containerCreate = new ContainerRules(_context);
         
-        Container myContinaer = containerCreate.Create( 2, new Article( "Laptop"), new Address("STRA1"));
+        Container myContinaer = containerCreate.Create( 2, new Article( 1, "Laptop"), new Address("STRA1"));
         
         return Ok();
     }

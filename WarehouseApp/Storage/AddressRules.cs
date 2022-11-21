@@ -1,10 +1,10 @@
-using WarehouseApp.InterfacesStorage;
+using WarehouseApp.Interfaces;
 using WarehouseCore.Entities.Storage;
 using WarehouseInfrastructure.Contexts;
 
 namespace WarehouseApp.Storage;
 
-public class AddressRules : IAddressCreate, IAddressModified, IAddressDelete
+public class AddressRules : IAddressRules
 {
     private readonly WarehouseDbContext _context;
 

@@ -15,7 +15,7 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article("Laptop")
+        dbContext.Articles.Add(new Article(1,"Laptop")
         {
             Containers = new List<Container>
             {
@@ -44,7 +44,7 @@ public class StorageEntities
     {
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
-        dbContext.Articles.Add(new Article("Laptop")
+        dbContext.Articles.Add(new Article(1, "Laptop")
         {
             Containers = new List<Container>
             {
@@ -77,7 +77,7 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article("Laptop")
+        dbContext.Articles.Add(new Article(1,"Laptop")
         {
             Containers = new List<Container>
             {
@@ -112,7 +112,7 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article("Laptop")
+        dbContext.Articles.Add(new Article(1,"Laptop")
         {
             Containers = new List<Container>
             {
@@ -144,7 +144,7 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
         // Act & Assert
-        Should.Throw<ContainerQtyZeroException>(() => dbContext.Articles.Add(new Article("Laptop")
+        Should.Throw<ContainerQtyZeroException>(() => dbContext.Articles.Add(new Article(1, "Laptop")
         {
             Containers = new List<Container>
             {

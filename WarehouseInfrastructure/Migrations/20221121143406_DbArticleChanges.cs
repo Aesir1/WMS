@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WarehouseInfrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class DbStructureArtUnities : Migration
+    public partial class DbArticleChanges : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,6 +26,20 @@ namespace WarehouseInfrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Articles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Articles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Departments",
                 columns: table => new
                 {
@@ -38,41 +52,6 @@ namespace WarehouseInfrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Departments", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Dimensions",
-                columns: table => new
-                {
-                    ArticleId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Length = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: false),
-                    Width = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: false),
-                    DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CodeId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Dimensions", x => x.ArticleId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Heavinesses",
-                columns: table => new
-                {
-                    ArticleId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Weight = table.Column<double>(type: "float", nullable: false),
-                    DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CodeId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Heavinesses", x => x.ArticleId);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,28 +93,68 @@ namespace WarehouseInfrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Articles",
+                name: "Containers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Qty = table.Column<int>(type: "int", nullable: false),
+                    AddressCodeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ArticleId = table.Column<int>(type: "int", nullable: false),
                     DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Articles", x => x.Id);
+                    table.PrimaryKey("PK_Containers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Articles_Dimensions_Id",
-                        column: x => x.Id,
-                        principalTable: "Dimensions",
-                        principalColumn: "ArticleId",
+                        name: "FK_Containers_Addresses_AddressCodeId",
+                        column: x => x.AddressCodeId,
+                        principalTable: "Addresses",
+                        principalColumn: "CodeId");
+                    table.ForeignKey(
+                        name: "FK_Containers_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "Articles",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dimensions",
+                columns: table => new
+                {
+                    ArticleId = table.Column<int>(type: "int", nullable: false),
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Length = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: false),
+                    Width = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dimensions", x => x.ArticleId);
+                    table.ForeignKey(
+                        name: "FK_Dimensions_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "Articles",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Heavinesses",
+                columns: table => new
+                {
+                    ArticleId = table.Column<int>(type: "int", nullable: false),
+                    Weight = table.Column<double>(type: "float", nullable: false),
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Heavinesses", x => x.ArticleId);
                     table.ForeignKey(
-                        name: "FK_Articles_Heavinesses_Id",
-                        column: x => x.Id,
-                        principalTable: "Heavinesses",
-                        principalColumn: "ArticleId",
+                        name: "FK_Heavinesses_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "Articles",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -165,33 +184,6 @@ namespace WarehouseInfrastructure.Migrations
                         principalTable: "UserInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Containers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Qty = table.Column<int>(type: "int", nullable: false),
-                    AddressCodeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ArticleId = table.Column<int>(type: "int", nullable: false),
-                    DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Containers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Containers_Addresses_AddressCodeId",
-                        column: x => x.AddressCodeId,
-                        principalTable: "Addresses",
-                        principalColumn: "CodeId");
-                    table.ForeignKey(
-                        name: "FK_Containers_Articles_ArticleId",
-                        column: x => x.ArticleId,
-                        principalTable: "Articles",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -249,10 +241,13 @@ namespace WarehouseInfrastructure.Migrations
                 name: "DepartmentUser");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
+                name: "Dimensions");
 
             migrationBuilder.DropTable(
-                name: "Articles");
+                name: "Heavinesses");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "Departments");
@@ -261,10 +256,7 @@ namespace WarehouseInfrastructure.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Dimensions");
-
-            migrationBuilder.DropTable(
-                name: "Heavinesses");
+                name: "Articles");
 
             migrationBuilder.DropTable(
                 name: "Permissions");

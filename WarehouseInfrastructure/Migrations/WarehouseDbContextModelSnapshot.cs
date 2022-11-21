@@ -166,69 +166,6 @@ namespace WarehouseInfrastructure.Migrations
                     b.ToTable("Containers");
                 });
 
-            modelBuilder.Entity("WarehouseCore.Entities.Unities.Dimension", b =>
-                {
-                    b.Property<int>("ArticleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleId"));
-
-                    b.Property<string>("CodeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateTimeUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Length")
-                        .HasPrecision(9, 4)
-                        .HasColumnType("decimal(9,4)");
-
-                    b.Property<decimal>("Width")
-                        .HasPrecision(9, 4)
-                        .HasColumnType("decimal(9,4)");
-
-                    b.HasKey("ArticleId");
-
-                    b.ToTable("Dimensions");
-                });
-
-            modelBuilder.Entity("WarehouseCore.Entities.Unities.Heaviness", b =>
-                {
-                    b.Property<int>("ArticleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleId"));
-
-                    b.Property<string>("CodeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateTimeUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
-
-                    b.HasKey("ArticleId");
-
-                    b.ToTable("Heavinesses");
-                });
-
             modelBuilder.Entity("WarehouseCore.Entities.User.User", b =>
                 {
                     b.Property<int>("Id")
@@ -313,17 +250,50 @@ namespace WarehouseInfrastructure.Migrations
 
             modelBuilder.Entity("WarehouseCore.Entities.Product.Article", b =>
                 {
-                    b.HasOne("WarehouseCore.Entities.Unities.Dimension", "Dimension")
-                        .WithOne("Article")
-                        .HasForeignKey("WarehouseCore.Entities.Product.Article", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.OwnsOne("WarehouseCore.Entities.Unities.Dimension", "Dimension", b1 =>
+                        {
+                            b1.Property<int>("ArticleId")
+                                .HasColumnType("int");
 
-                    b.HasOne("WarehouseCore.Entities.Unities.Heaviness", "Heaviness")
-                        .WithOne("Article")
-                        .HasForeignKey("WarehouseCore.Entities.Product.Article", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                            b1.Property<decimal>("Length")
+                                .HasPrecision(9, 4)
+                                .HasColumnType("decimal(9,4)");
+
+                            b1.Property<string>("Unit")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<decimal>("Width")
+                                .HasPrecision(9, 4)
+                                .HasColumnType("decimal(9,4)");
+
+                            b1.HasKey("ArticleId");
+
+                            b1.ToTable("Dimensions");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ArticleId");
+                        });
+
+                    b.OwnsOne("WarehouseCore.Entities.Unities.Heaviness", "Heaviness", b1 =>
+                        {
+                            b1.Property<int>("ArticleId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("Unit")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<double>("Weight")
+                                .HasColumnType("float");
+
+                            b1.HasKey("ArticleId");
+
+                            b1.ToTable("Heavinesses");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ArticleId");
+                        });
 
                     b.Navigation("Dimension");
 
@@ -381,18 +351,6 @@ namespace WarehouseInfrastructure.Migrations
             modelBuilder.Entity("WarehouseCore.Entities.Storage.Address", b =>
                 {
                     b.Navigation("Containers");
-                });
-
-            modelBuilder.Entity("WarehouseCore.Entities.Unities.Dimension", b =>
-                {
-                    b.Navigation("Article")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("WarehouseCore.Entities.Unities.Heaviness", b =>
-                {
-                    b.Navigation("Article")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("WarehouseCore.Entities.User.UserInfo", b =>

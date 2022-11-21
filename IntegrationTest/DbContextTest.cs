@@ -6,7 +6,7 @@ namespace IntegrationTest;
 
 public sealed class DbContextTest : WarehouseDbContext
 {
-    public DbContextTest(SqliteConnection? sqliteConnection = default) : base(new DbContextOptionsBuilder<WarehouseDbContext>().UseSqlite(OpenConnection()).Options)
+    public DbContextTest() : base(new DbContextOptionsBuilder<WarehouseDbContext>().UseSqlite(OpenConnection()).Options)
     {
         Database.EnsureCreated();
     }

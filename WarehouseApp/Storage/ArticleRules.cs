@@ -1,4 +1,4 @@
-using WarehouseApp.InterfacesStorage;
+using WarehouseApp.Interfaces;
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
 using WarehouseCore.Entities.Unities;
@@ -6,7 +6,7 @@ using WarehouseInfrastructure.Contexts;
 
 namespace WarehouseApp.Storage;
 
-public class ArticleRules : IArticleCreate, IArticleModified, IArticleDelete
+public class ArticleRules : IArticleRules
 {
     private readonly WarehouseDbContext _context;
 
@@ -17,7 +17,7 @@ public class ArticleRules : IArticleCreate, IArticleModified, IArticleDelete
 
     public Article Create(int id, string name, ICollection<Container> containers)
     {
-        Article article = new(name) { Containers = containers };
+        Article article = new(id, name) { Containers = containers };
         try
         {
             // ToDo possible double address id reference specific implementations required  
