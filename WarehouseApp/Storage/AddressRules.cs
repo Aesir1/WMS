@@ -13,7 +13,7 @@ public class AddressRules : IAddressRules
         _context = context;
     }
     
-    public Address Create(string codeId, ICollection<Container>? containers,
+    public Address Create(string codeId, ICollection<Container>? containers = default,
         string? description = default)
     {
         Address address = new (codeId)
@@ -23,7 +23,6 @@ public class AddressRules : IAddressRules
         };
         try
         {
-            // ToDo possible double address id reference specific implementations required  
             _context.Addresses.Add(address);
             _context.SaveChanges();
         }
@@ -35,21 +34,20 @@ public class AddressRules : IAddressRules
 
         return address;
     }
-    
-    public Address Modified(string codeId, string? description = default, ICollection<Container>? containers = default)
+   
+    public Address Modified(string codeId, string? description = default)
     {
         Address? address = _context.Addresses.First(c => c.CodeId == codeId);
         if (address == null)
         {
             throw new ($"address id doesn't exists: {codeId}");
         }
-        if (description == default && containers == default)
+        if (description == default)
         {
             throw new ("there's nothing here to update");
         }
         
         address.Description = description;
-        // ToDo Containers collections need to be handle
         _context.SaveChanges();
         return address;
     }
@@ -60,6 +58,11 @@ public class AddressRules : IAddressRules
         if (address == null)
         {
             throw new ($"Address id doesn't exists:{codeId}");
+        }
+
+        if (address.Containers != null)
+        {
+            throw new Exception($"Address {codeId} has {address.Containers.Count} container. In order to delete an address, no container should be inside of it.");
         }
 
         try

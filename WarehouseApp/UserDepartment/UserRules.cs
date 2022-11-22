@@ -1,11 +1,11 @@
-using WarehouseApp.InterfacesUser;
+using WarehouseApp.Interfaces;
 using WarehouseCore.Entities.Organisation;
 using WarehouseCore.Entities.User;
 using WarehouseInfrastructure.Contexts;
 
 namespace WarehouseApp.UserDepartment;
 
-public class UserRules : IUserCreate, IUserModified, IUserDelete
+public class UserRules : IUserRules
 {
     private readonly WarehouseDbContext _context;
 

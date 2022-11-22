@@ -15,12 +15,11 @@ public class ArticleRules : IArticleRules
         _context = context;
     }
 
-    public Article Create(int id, string name, ICollection<Container> containers)
+    public Article Create(int id, string name, ICollection<Container>? containers = default)
     {
         Article article = new(id, name) { Containers = containers };
         try
         {
-            // ToDo possible double address id reference specific implementations required  
             _context.Articles.Add(article);
             _context.SaveChanges();
         }
@@ -33,8 +32,7 @@ public class ArticleRules : IArticleRules
     }
 
     public Article Modified(int id, string? name = default,
-        Dimension? dimension = default, Heaviness? heaviness = default,
-        ICollection<Container>? containers = default)
+        Dimension? dimension = default, Heaviness? heaviness = default)
     {
         Article? article = _context.Articles.First(c => c.Id == id);
         if (article == null)
@@ -42,7 +40,7 @@ public class ArticleRules : IArticleRules
             throw new($"address id doesn't exists: {id}");
         }
 
-        if (name == default && dimension == default && heaviness == default && containers == default)
+        if (name == default && dimension == default && heaviness == default)
         {
             throw new("there's nothing here to update");
         }
@@ -50,7 +48,6 @@ public class ArticleRules : IArticleRules
         article.Name = name ?? article.Name;
         article.Dimension = dimension ?? article.Dimension;
         article.Heaviness = heaviness ?? article.Heaviness;
-        //Todo containers action need to be handle
         _context.SaveChanges();
         return article;
     }
