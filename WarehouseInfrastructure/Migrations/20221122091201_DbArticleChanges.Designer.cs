@@ -12,7 +12,7 @@ using WarehouseInfrastructure.Contexts;
 namespace WarehouseInfrastructure.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    [Migration("20221121143406_DbArticleChanges")]
+    [Migration("20221122091201_DbArticleChanges")]
     partial class DbArticleChanges
     {
         /// <inheritdoc />
@@ -272,7 +272,7 @@ namespace WarehouseInfrastructure.Migrations
 
                             b1.HasKey("ArticleId");
 
-                            b1.ToTable("Dimensions");
+                            b1.ToTable("Articles");
 
                             b1.WithOwner()
                                 .HasForeignKey("ArticleId");
@@ -292,7 +292,7 @@ namespace WarehouseInfrastructure.Migrations
 
                             b1.HasKey("ArticleId");
 
-                            b1.ToTable("Heavinesses");
+                            b1.ToTable("Articles");
 
                             b1.WithOwner()
                                 .HasForeignKey("ArticleId");

@@ -269,7 +269,7 @@ namespace WarehouseInfrastructure.Migrations
 
                             b1.HasKey("ArticleId");
 
-                            b1.ToTable("Dimensions");
+                            b1.ToTable("Articles");
 
                             b1.WithOwner()
                                 .HasForeignKey("ArticleId");
@@ -289,7 +289,7 @@ namespace WarehouseInfrastructure.Migrations
 
                             b1.HasKey("ArticleId");
 
-                            b1.ToTable("Heavinesses");
+                            b1.ToTable("Articles");
 
                             b1.WithOwner()
                                 .HasForeignKey("ArticleId");

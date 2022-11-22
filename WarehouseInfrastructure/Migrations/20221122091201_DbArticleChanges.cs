@@ -31,6 +31,11 @@ namespace WarehouseInfrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DimensionLength = table.Column<decimal>(name: "Dimension_Length", type: "decimal(9,4)", precision: 9, scale: 4, nullable: true),
+                    DimensionWidth = table.Column<decimal>(name: "Dimension_Width", type: "decimal(9,4)", precision: 9, scale: 4, nullable: true),
+                    DimensionUnit = table.Column<string>(name: "Dimension_Unit", type: "nvarchar(max)", nullable: true),
+                    HeavinessWeight = table.Column<double>(name: "Heaviness_Weight", type: "float", nullable: true),
+                    HeavinessUnit = table.Column<string>(name: "Heaviness_Unit", type: "nvarchar(max)", nullable: true),
                     DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateTimeUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -120,45 +125,6 @@ namespace WarehouseInfrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Dimensions",
-                columns: table => new
-                {
-                    ArticleId = table.Column<int>(type: "int", nullable: false),
-                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Length = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: false),
-                    Width = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Dimensions", x => x.ArticleId);
-                    table.ForeignKey(
-                        name: "FK_Dimensions_Articles_ArticleId",
-                        column: x => x.ArticleId,
-                        principalTable: "Articles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Heavinesses",
-                columns: table => new
-                {
-                    ArticleId = table.Column<int>(type: "int", nullable: false),
-                    Weight = table.Column<double>(type: "float", nullable: false),
-                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Heavinesses", x => x.ArticleId);
-                    table.ForeignKey(
-                        name: "FK_Heavinesses_Articles_ArticleId",
-                        column: x => x.ArticleId,
-                        principalTable: "Articles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -241,22 +207,16 @@ namespace WarehouseInfrastructure.Migrations
                 name: "DepartmentUser");
 
             migrationBuilder.DropTable(
-                name: "Dimensions");
-
-            migrationBuilder.DropTable(
-                name: "Heavinesses");
-
-            migrationBuilder.DropTable(
                 name: "Addresses");
+
+            migrationBuilder.DropTable(
+                name: "Articles");
 
             migrationBuilder.DropTable(
                 name: "Departments");
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Articles");
 
             migrationBuilder.DropTable(
                 name: "Permissions");

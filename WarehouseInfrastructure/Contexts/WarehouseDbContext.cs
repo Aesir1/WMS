@@ -20,8 +20,6 @@ public class WarehouseDbContext : DbContext
     public DbSet<Article> Articles { get; set; }
     public DbSet<Container> Containers { get; set; }
     public DbSet<Address> Addresses { get; set; }
-    public DbSet<Heaviness> Heavinesses { get; set; }
-    public DbSet<Dimension> Dimensions { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserInfo> UserInfos { get; set; }
