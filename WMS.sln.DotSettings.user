@@ -22,5 +22,9 @@
     &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.ArticleRulesTest.ArticleCreate&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.ArticleRulesTest.ArticleModified&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.ArticleRulesTest.ArticleDelete&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Controllers.ContainerControllerTest.GetOnSuccessContainerList&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Controllers.ContainerControllerTest.CreateContainerOnSuccess&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Controllers.ContainerControllerTest.CreateContainerOnFail&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Controllers.ContainerControllerTest.ModifiedContainerOnFail&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -48,8 +48,8 @@ public class ContainerController : Controller
 
     [HttpPatch]
     [Route("internal/[controller]/modifiedContainer")]
-    public ActionResult<Container> ModifiedContainer(int id, int qty, [FromBody] Address? address,
-        [FromBody] Article? article)
+    public ActionResult<Container> ModifiedContainer(int id, int qty, [FromBody] Address? address = default,
+        [FromBody] Article? article = default)
     {
         IContainerRules containerCreate = new ContainerRules(_context);
         Container container;
@@ -65,7 +65,7 @@ public class ContainerController : Controller
             return this.NotModified(e);
         }
         // Todo refinement from URI signalization
-        return Created($"internal/[controller]/getContainer:{container.Id}", container);
+        return Ok(container);
     }
 
     [HttpDelete]

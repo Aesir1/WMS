@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ApiRest\ApiRest.csproj" />
       <ProjectReference Include="..\WarehouseApp\WarehouseApp.csproj" />
       <ProjectReference Include="..\WarehouseInfrastructure\WarehouseInfrastructure.csproj" />
     </ItemGroup>
