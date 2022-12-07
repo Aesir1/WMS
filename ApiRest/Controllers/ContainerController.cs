@@ -27,14 +27,14 @@ public class ContainerController : Controller
 
     [HttpPost]
     [Route("internal/[controller]/createContainer")]
-    public ActionResult<Container> CreateContainer([FromBody] int qty, [FromBody] Article article,
+    public async Task<ActionResult<Container>> CreateContainer([FromBody] int qty, [FromBody] Article article,
         [FromBody] Address address)
     {
         IContainerRules containerCreate = new ContainerRules(_context);
         Container container;
         try
         {
-            container = containerCreate.Create(qty, article, address);
+            container = await containerCreate.Create(qty, article, address);
         }
         catch (Exception e)
         {
@@ -48,14 +48,14 @@ public class ContainerController : Controller
 
     [HttpPatch]
     [Route("internal/[controller]/modifiedContainer")]
-    public ActionResult<Container> ModifiedContainer(int id, int qty, [FromBody] Address? address = default,
+    public async Task<ActionResult<Container>> ModifiedContainer(int id, int qty, [FromBody] Address? address = default,
         [FromBody] Article? article = default)
     {
         IContainerRules containerCreate = new ContainerRules(_context);
         Container container;
         try
         {
-            container = containerCreate.Modified(id, qty, address, article);
+            container = await containerCreate.Modified(id, qty, address, article);
         }
         catch (Exception e)
         {

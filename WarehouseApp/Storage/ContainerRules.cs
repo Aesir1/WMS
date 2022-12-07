@@ -14,39 +14,48 @@ public class ContainerRules : IContainerRules
         _context = warehouseDbContext;
     }
 
-    public Container Create(int qty, Article article, Address address)
+    public async Task<Container> Create(int qty, Article article, Address address)
     {
         Container container = new Container(qty)
         {
             Article = article,
             Address = address
         };
-        _context.Containers.Add(container);
-        _context.SaveChanges();
+        try
+        {
+            _context.Containers.Add(container);
+            // Todo Try and Catch for failing container saving
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
 
         return container;
     }
-    public Container Modified(int id, int qty, Address? address = default, Article? article = default)
+    public async Task<Container> Modified(int id, int qty, Address? address = default, Article? article = default)
     {
-        Container? container = _context.Containers.First(c => c.Id == id);
+        Container? container = _context.Containers.FirstOrDefault(c => c.Id == id);
         if (container == null)
         {
             throw new Exception($"Container ID: {id} not found");
         }
-        if (qty == default && address == default && article == default)
+        if (qty == container.Qty && address == container.Address && article == container.Article)
         {
             throw new Exception($"Container Nr: {id} has nothing to modified");
         }
         container.Qty = qty;
         container.Address = address ?? container.Address;
         container.Article = article ?? container.Article;
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
         return container;
     }
 
     public bool Delete(int id)
     {
-        Container? container = _context.Containers.First(c => c.Id == id);
+        Container? container = _context.Containers.FirstOrDefault(c => c.Id == id);
         if (container == null)
         {
             throw new Exception($"Container ID: {id} not found");
