@@ -15,9 +15,15 @@ public class ArticleRules : IArticleRules
         _context = context;
     }
 
-    public Article Create(int id, string name, ICollection<Container>? containers = default)
+    public Article Create(int id, string name, ICollection<Container>? containers = default,
+        Dimension? dimension = default, Heaviness? heaviness = default)
     {
-        Article article = new(id, name) { Containers = containers };
+        Article article = new(id, name)
+        {
+            Containers = containers,
+            Dimension = dimension,
+            Heaviness = heaviness
+        };
         try
         {
             _context.Articles.Add(article);
@@ -34,10 +40,10 @@ public class ArticleRules : IArticleRules
     public Article Modify(int id, string? name = default,
         Dimension? dimension = default, Heaviness? heaviness = default)
     {
-        Article? article = _context.Articles.First(c => c.Id == id);
+        Article? article = _context.Articles.FirstOrDefault(c => c.Id == id);
         if (article == null)
         {
-            throw new($"address id doesn't exists: {id}");
+            throw new($"Article ID doesn't exists: {id}");
         }
 
         if (name == default && dimension == default && heaviness == default)
@@ -54,10 +60,10 @@ public class ArticleRules : IArticleRules
 
     public bool Delete(int id)
     {
-        Article? article = _context.Articles.First(a => a.Id == id);
+        Article? article = _context.Articles.FirstOrDefault(a => a.Id == id);
         if (article == null)
         {
-            throw new($"Address id doesn't exists:{id}");
+            throw new($"Article ID doesn't exists:{id}");
         }
 
         try

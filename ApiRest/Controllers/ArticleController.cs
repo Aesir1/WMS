@@ -45,13 +45,14 @@ public class ArticleController : Controller
     [HttpPost]
     [Route("internal/[controller]/createArticle")]
     public ActionResult<Article> CreateArticle([FromBody] int id, [FromBody] string name,
-        [FromBody] ICollection<Container>? containers = default)
+        [FromBody] ICollection<Container>? containers = default,
+        Dimension? dimension = default, Heaviness? heaviness = default)
     {
         IArticleRules articleRules = new ArticleRules(_context);
         Article article;
         try
         {
-            article = articleRules.Create(id, name, containers);
+            article = articleRules.Create(id, name, containers, dimension, heaviness);
         }
         catch (Exception e)
         {
@@ -59,7 +60,7 @@ public class ArticleController : Controller
             return BadRequest(e);
         }
         // Todo refinement from URI signalization
-        return Created($"internal/AddressController/getAddress:{article.Id}",article);
+        return Created($"internal/ArticleController/getArticle:{article.Id}",article);
     }
 
     [HttpPatch]
