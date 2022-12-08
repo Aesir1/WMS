@@ -1,3 +1,4 @@
+using IntegrationTest;
 using Shouldly;
 using WarehouseApp.Interfaces;
 using WarehouseApp.Storage;
@@ -6,7 +7,7 @@ using WarehouseCore.Entities.Storage;
 using WarehouseInfrastructure.Contexts;
 using Xunit;
 
-namespace IntegrationTest.Storage;
+namespace XunitTest.Storage;
 
 public class AddressRulesTest
 {
@@ -40,7 +41,7 @@ public class AddressRulesTest
             }, description: "Temporary text");
 
         // Act
-        addressCreateTest.Modified(codeId: "Temp1", description: "Forever young");
+        addressCreateTest.Modify(codeId: "Temp1", description: "Forever young");
         var addressFromDb = context.Addresses.First();
         // Assert
         context.Addresses.Count().ShouldBe(1);

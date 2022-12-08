@@ -29,13 +29,13 @@ public class AddressRules : IAddressRules
         catch (Exception ex)
         {
             
-            throw ex;
+            throw ;
         }
 
         return address;
     }
    
-    public Address Modified(string codeId, string? description = default)
+    public Address Modify(string codeId, string? description = default)
     {
         Address? address = _context.Addresses.First(c => c.CodeId == codeId);
         if (address == null)

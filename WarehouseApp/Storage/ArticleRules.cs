@@ -31,7 +31,7 @@ public class ArticleRules : IArticleRules
         return article;
     }
 
-    public Article Modified(int id, string? name = default,
+    public Article Modify(int id, string? name = default,
         Dimension? dimension = default, Heaviness? heaviness = default)
     {
         Article? article = _context.Articles.First(c => c.Id == id);

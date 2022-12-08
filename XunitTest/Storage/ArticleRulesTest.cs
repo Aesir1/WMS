@@ -1,3 +1,4 @@
+using IntegrationTest;
 using Shouldly;
 using WarehouseApp.Interfaces;
 using WarehouseApp.Storage;
@@ -5,7 +6,7 @@ using WarehouseCore.Entities.Unities;
 using WarehouseInfrastructure.Contexts;
 using Xunit;
 
-namespace IntegrationTest.Storage;
+namespace XunitTest.Storage;
 
 public class ArticleRulesTest
 {
@@ -32,7 +33,7 @@ public class ArticleRulesTest
         IArticleRules articleRules = new ArticleRules(context);
         articleRules.Create(10, "Laptop");
         // Act
-        articleRules.Modified(10, "Display", new Dimension("cm", 40, 60), new Heaviness("kg", 6));
+        articleRules.Modify(10, "Display", new Dimension("cm", 40, 60), new Heaviness("kg", 6));
         var articleFromDb = context.Articles.First();
         // Assert
         articleFromDb.Name.ShouldBe("Display");

@@ -43,12 +43,12 @@ public class ContainerController : Controller
         }
 
         // Todo refinement from URI signalization
-        return Created($"internal/[controller]/getContainer:{container.Id}", container);
+        return Created($"internal/ContainerController/getContainer:{container.Id}", container);
     }
 
     [HttpPatch]
     [Route("internal/[controller]/modifiedContainer")]
-    public async Task<ActionResult<Container>> ModifiedContainer(int id, int qty, [FromBody] Address? address = default,
+    public async Task<ActionResult<Container>> ModifyContainer(int id, int qty, [FromBody] Address? address = default,
         [FromBody] Article? article = default)
     {
         IContainerRules containerCreate = new ContainerRules(_context);
@@ -73,9 +73,8 @@ public class ContainerController : Controller
     public ActionResult DeleteContainer(int id)
     {
         IContainerRules containerCreate = new ContainerRules(_context);
-        Container container;
         try
-        {
+        { 
             containerCreate.Delete(id);
         }
         catch (Exception e)

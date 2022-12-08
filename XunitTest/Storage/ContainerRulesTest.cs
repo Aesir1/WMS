@@ -1,3 +1,4 @@
+using IntegrationTest;
 using Shouldly;
 using WarehouseApp.Interfaces;
 using WarehouseApp.Storage;
@@ -6,7 +7,7 @@ using WarehouseCore.Entities.Storage;
 using WarehouseInfrastructure.Contexts;
 using Xunit;
 
-namespace IntegrationTest.Storage;
+namespace XunitTest.Storage;
 
 public class ContainerRulesTest
 {

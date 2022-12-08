@@ -62,6 +62,7 @@ public class ContainerRules : IContainerRules
         }
 
         _context.Containers.Remove(container);
+        // Todo Try and catch for failing saveChanges
         _context.SaveChanges();
         return true;
     }

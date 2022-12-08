@@ -7,7 +7,7 @@ namespace WarehouseApp.Interfaces;
 public interface IArticleRules
 {
     Article Create(int id, string name, ICollection<Container>? containers = default);
-    Article Modified(int id, string? name = default,
+    Article Modify(int id, string? name = default,
         Dimension? dimension = default, Heaviness? heaviness = default);
     bool Delete(int id);
 }

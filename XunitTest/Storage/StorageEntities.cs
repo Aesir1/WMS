@@ -1,3 +1,4 @@
+using IntegrationTest;
 using Shouldly;
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
@@ -5,7 +6,7 @@ using WarehouseCore.Exceptions;
 using WarehouseInfrastructure.Contexts;
 using Xunit;
 
-namespace IntegrationTest.Storage;
+namespace XunitTest.Storage;
 
 public class StorageEntities
 {

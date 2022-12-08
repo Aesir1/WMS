@@ -36,7 +36,7 @@ public class ContainerControllerTest
     }
 
     [Fact]
-    public void CreateContainerOnFail()
+    public void CreateContainerOnFailWhenQtyZero()
     {
         //Arrange
         WarehouseDbContext context = new DbContextTest();
@@ -57,7 +57,7 @@ public class ContainerControllerTest
         await controller.CreateContainer(ContainerFixtureCreate.Qty, ContainerFixtureCreate.Article,
             ContainerFixtureCreate.Address);
         // Act
-        ActionResult<Container> result = controller.ModifiedContainer(1, 3).Result;
+        ActionResult<Container> result = controller.ModifyContainer(1, 3).Result;
         var resultFromResult = result.Result as OkObjectResult;
         // Assert
         result.Result.ShouldBeOfType<OkObjectResult>().StatusCode.ShouldBe(200);
@@ -73,7 +73,7 @@ public class ContainerControllerTest
         await controller.CreateContainer(ContainerFixtureCreate.Qty, ContainerFixtureCreate.Article,
             ContainerFixtureCreate.Address);
         // Act
-        var result = controller.ModifiedContainer(2, 3).Result;
+        var result = controller.ModifyContainer(2, 3).Result;
         var resultFromResult = result.Result as ObjectResult;
         // Assert
         result.Result.ShouldBeOfType<ObjectResult>().StatusCode.ShouldBe(304);
@@ -89,7 +89,7 @@ public class ContainerControllerTest
         await controller.CreateContainer(ContainerFixtureCreate.Qty, ContainerFixtureCreate.Article,
             ContainerFixtureCreate.Address);
         // Act
-        var result = controller.ModifiedContainer(1, ContainerFixtureCreate.Qty, ContainerFixtureCreate.Address,
+        var result = controller.ModifyContainer(1, ContainerFixtureCreate.Qty, ContainerFixtureCreate.Address,
             ContainerFixtureCreate.Article).Result;
         var resultFromResult = result.Result as ObjectResult;
         // Assert
