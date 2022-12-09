@@ -7,18 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
-      <PackageReference Include="Shouldly" Version="4.1.0" />
-      <PackageReference Include="xunit" Version="2.4.2" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2"/>
+        <PackageReference Include="Shouldly" Version="4.1.0"/>
+        <PackageReference Include="xunit" Version="2.4.2"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\IntegrationTest\IntegrationTest.csproj" />
-      <ProjectReference Include="..\WarehouseInfrastructure\WarehouseInfrastructure.csproj" />
+        <ProjectReference Include="..\IntegrationTest\IntegrationTest.csproj"/>
+        <ProjectReference Include="..\WarehouseInfrastructure\WarehouseInfrastructure.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="User" />
+        <Folder Include="User"/>
     </ItemGroup>
 
 </Project>

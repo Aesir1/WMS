@@ -13,6 +13,7 @@ public class Container : IdEntity
     {
         Qty = qty > 0 ? qty : throw new ContainerQtyZeroException();
     }
+
     public int Qty { get; set; }
     public Address Address { get; set; }
     public Article Article { get; set; }

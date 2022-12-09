@@ -9,8 +9,8 @@ public static class ArticleFixture
 {
     public static readonly int Id = 7;
     public static readonly string Name = "Laptop";
-    public static readonly Dimension Dimension = new Dimension("cm", 20, 40);
-    public static readonly Heaviness Heaviness = new Heaviness("kg", 2.2);
+    public static readonly Dimension Dimension = new("cm", 20, 40);
+    public static readonly Heaviness Heaviness = new("kg", 2.2);
 
 
     public static void CreateOneArticle(WarehouseDbContext context)
@@ -18,7 +18,7 @@ public static class ArticleFixture
         IArticleRules articleRules = new ArticleRules(context);
         articleRules.Create(Id, Name, dimension: Dimension, heaviness: Heaviness);
     }
-    
+
     public static void CreateListOfArticle(WarehouseDbContext context)
     {
         IArticleRules articleRules = new ArticleRules(context);

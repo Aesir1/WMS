@@ -22,7 +22,7 @@ public class UserRules : IUserRules
             Email = email,
             Password = password,
             Permission = permission,
-            UserInfo = userInfo, 
+            UserInfo = userInfo,
             Departments = departments
         };
         try

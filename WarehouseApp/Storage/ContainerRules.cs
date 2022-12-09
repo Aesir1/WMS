@@ -16,7 +16,7 @@ public class ContainerRules : IContainerRules
 
     public Container Create(int qty, Article article, Address address)
     {
-        Container container = new Container(qty)
+        var container = new Container(qty)
         {
             Article = article,
             Address = address
@@ -25,7 +25,7 @@ public class ContainerRules : IContainerRules
         {
             _context.Containers.Add(container);
             // Todo Try and Catch for failing container saving
-           _context.SaveChanges();
+            _context.SaveChanges();
         }
         catch (Exception e)
         {
@@ -35,17 +35,13 @@ public class ContainerRules : IContainerRules
 
         return container;
     }
+
     public Container Modified(int id, int qty, Address? address = default, Article? article = default)
     {
-        Container? container = _context.Containers.FirstOrDefault(c => c.Id == id);
-        if (container == null)
-        {
-            throw new Exception($"Container ID: {id} not found");
-        }
+        var container = _context.Containers.FirstOrDefault(c => c.Id == id);
+        if (container == null) throw new Exception($"Container ID: {id} not found");
         if (qty == container.Qty && address == container.Address && article == container.Article)
-        {
             throw new Exception($"Container Nr: {id} has nothing to modified");
-        }
         container.Qty = qty;
         container.Address = address ?? container.Address;
         container.Article = article ?? container.Article;
@@ -55,11 +51,8 @@ public class ContainerRules : IContainerRules
 
     public bool Delete(int id)
     {
-        Container? container = _context.Containers.FirstOrDefault(c => c.Id == id);
-        if (container == null)
-        {
-            throw new Exception($"Container ID: {id} not found");
-        }
+        var container = _context.Containers.FirstOrDefault(c => c.Id == id);
+        if (container == null) throw new Exception($"Container ID: {id} not found");
 
         _context.Containers.Remove(container);
         // Todo Try and catch for failing saveChanges

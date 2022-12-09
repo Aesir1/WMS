@@ -15,28 +15,22 @@ public class AddressController : Controller
     {
         _context = context;
     }
-    
+
     [HttpGet]
-    [Route("internal/[controller]/getAddress:codeId")]
+    [Route("internal/[controller]/getAddress/")]
     public ActionResult<Address> GetAddress(string codeId)
     {
-        Address? address = _context.Addresses.FirstOrDefault(a => a.CodeId == codeId);
-        if (address == null)
-        {
-            return NotFound();
-        }
+        var address = _context.Addresses.FirstOrDefault(a => a.CodeId == codeId);
+        if (address == null) return NotFound();
         return Ok(address);
     }
-    
+
     [HttpGet]
     [Route("internal/[controller]/getAddresses")]
     public ActionResult<ICollection<Address>> GetAddresses()
     {
         var addresses = _context.Addresses.ToList();
-        if (!addresses.Any())
-        {
-            return NotFound();
-        }
+        if (!addresses.Any()) return NotFound();
         return Ok(addresses);
     }
 
@@ -56,6 +50,7 @@ public class AddressController : Controller
             Console.WriteLine(e);
             return BadRequest(e);
         }
+
         // Todo refinement from URI signalization
         return Created($"internal/AddressController/getAddress:{address.CodeId}", address);
     }
@@ -75,11 +70,12 @@ public class AddressController : Controller
             Console.WriteLine(e);
             return this.NotModified(e);
         }
+
         return Ok(address);
     }
 
     [HttpDelete]
-    [Route("internal/[controller]/deleteAddress")]
+    [Route("internal/[controller]/deleteAddress/")]
     public ActionResult DeleteAddress(string codeId)
     {
         IAddressRules addressRules = new AddressRules(_context);
@@ -92,6 +88,7 @@ public class AddressController : Controller
             Console.WriteLine(e);
             return this.NotModified(e);
         }
+
         return NoContent();
     }
 }

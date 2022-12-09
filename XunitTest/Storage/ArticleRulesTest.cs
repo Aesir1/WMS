@@ -18,7 +18,7 @@ public class ArticleRulesTest
         IArticleRules articleRules = new ArticleRules(context);
         // Act
         var article = articleRules.Create(10, "Laptop");
-        
+
         var articleFromDb = context.Articles.First();
         // Assert
         context.Articles.Count().ShouldBe(1);
@@ -49,8 +49,8 @@ public class ArticleRulesTest
         IArticleRules articleRules = new ArticleRules(context);
         articleRules.Create(10, "Laptop");
         // Act
-        bool articleDeleted = articleRules.Delete(10);
-         
+        var articleDeleted = articleRules.Delete(10);
+
         // Assert
         articleDeleted.ShouldBe(true);
         context.Articles.Count().ShouldBe(0);

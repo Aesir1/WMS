@@ -16,7 +16,7 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article(1,"Laptop")
+        dbContext.Articles.Add(new Article(1, "Laptop")
         {
             Containers = new List<Container>
             {
@@ -71,14 +71,14 @@ public class StorageEntities
         article.Count.ShouldBe(0);
         container.Count.ShouldBe(0);
     }
-    
+
     [Fact]
     public void AddressPersistenceAfterArticleAndContainerDeleted()
     {
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article(1,"Laptop")
+        dbContext.Articles.Add(new Article(1, "Laptop")
         {
             Containers = new List<Container>
             {
@@ -113,7 +113,7 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article(1,"Laptop")
+        dbContext.Articles.Add(new Article(1, "Laptop")
         {
             Containers = new List<Container>
             {
@@ -139,6 +139,7 @@ public class StorageEntities
         address.Count.ShouldBe(1);
         container.Count.ShouldBe(0);
     }
+
     [Fact]
     public void ContainerNotCreatedWhenQtyZero()
     {

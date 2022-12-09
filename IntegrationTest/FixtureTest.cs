@@ -20,7 +20,7 @@ public class FixtureTest
         containersBefore.Count.ShouldBe(0);
         containersAfter.Count.ShouldBe(1);
     }
-    
+
     [Fact]
     public void CreateListOfContainerFixtureOnSuccess()
     {
@@ -34,7 +34,7 @@ public class FixtureTest
         containersBefore.Count.ShouldBe(0);
         containersAfter.Count.ShouldBe(2);
     }
-    
+
     [Fact]
     public void CreateOneArticleFixtureOnSuccess()
     {
@@ -48,7 +48,7 @@ public class FixtureTest
         articlesBefore.Count.ShouldBe(0);
         articlesAfter.Count.ShouldBe(1);
     }
-    
+
     [Fact]
     public void CreateListOfArticleFixtureOnSuccess()
     {
@@ -62,7 +62,7 @@ public class FixtureTest
         articlesBefore.Count.ShouldBe(0);
         articlesAfter.Count.ShouldBe(3);
     }
-    
+
     [Fact]
     public void CreateOneAddressFixtureOnSuccess()
     {
@@ -76,7 +76,7 @@ public class FixtureTest
         addressesBefore.Count.ShouldBe(0);
         addressesAfter.Count.ShouldBe(1);
     }
-    
+
     [Fact]
     public void CreateListOfAddressesFixtureOnSuccess()
     {

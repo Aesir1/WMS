@@ -4,9 +4,10 @@ using WarehouseCore.Entities.Unities;
 using WarehouseCore.Interfaces;
 
 namespace WarehouseCore.Entities.Product;
- /// <summary>
- /// Article is a product reference that can be allocated into many container
- /// </summary>
+
+/// <summary>
+///     Article is a product reference that can be allocated into many container
+/// </summary>
 public class Article : IdEntity, IAttachableToContainer
 {
     public Article(int id, string name)
