@@ -18,23 +18,39 @@ public class ContainerController : Controller
     }
 
     [HttpGet]
+    [Route("internal/[controller]/getContainer:Id")]
+    public ActionResult<Container> GetContainer(int id)
+    {
+        Container? container = _context.Containers.FirstOrDefault(c => c.Id == id);
+        if (container == null)
+        {
+            return NotFound();
+        }
+        return Ok(container);
+    }
+    
+    [HttpGet]
     [Route("internal/[controller]/getContainers")]
-    public ActionResult<ICollection<Container>> GetContainer()
+    public ActionResult<ICollection<Container>> GetContainers()
     {
         var containers = _context.Containers.ToList();
+        if (!containers.Any())
+        {
+            return NotFound();
+        }
         return Ok(containers);
     }
 
     [HttpPost]
     [Route("internal/[controller]/createContainer")]
-    public async Task<ActionResult<Container>> CreateContainer([FromBody] int qty, [FromBody] Article article,
+    public ActionResult<Container> CreateContainer([FromBody] int qty, [FromBody] Article article,
         [FromBody] Address address)
     {
         IContainerRules containerCreate = new ContainerRules(_context);
         Container container;
         try
         {
-            container = await containerCreate.Create(qty, article, address);
+            container = containerCreate.Create(qty, article, address);
         }
         catch (Exception e)
         {
@@ -48,14 +64,14 @@ public class ContainerController : Controller
 
     [HttpPatch]
     [Route("internal/[controller]/modifiedContainer")]
-    public async Task<ActionResult<Container>> ModifyContainer(int id, int qty, [FromBody] Address? address = default,
+    public ActionResult<Container> ModifyContainer(int id, int qty, [FromBody] Address? address = default,
         [FromBody] Article? article = default)
     {
         IContainerRules containerCreate = new ContainerRules(_context);
         Container container;
         try
         {
-            container = await containerCreate.Modified(id, qty, address, article);
+            container = containerCreate.Modified(id, qty, address, article);
         }
         catch (Exception e)
         {

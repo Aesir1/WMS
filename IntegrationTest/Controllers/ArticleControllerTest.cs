@@ -76,7 +76,7 @@ public class ArticleControllerTest
     
     
     [Fact]
-    public void CreateOnFailArticle()
+    public void CreateOnFailArticleWithSameId()
     {
         // Arrange
         WarehouseDbContext context = new DbContextTest();

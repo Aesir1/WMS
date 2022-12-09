@@ -18,7 +18,7 @@ public class ContainerRulesTest
         WarehouseDbContext context = new DbContextTest();
         IContainerRules containerCreateTest = new ContainerRules(context);
         // Act
-        var container = containerCreateTest.Create(1, new Article(1, "Coco"), new Address("STRA1") ).Result;
+        var container = containerCreateTest.Create(1, new Article(1, "Coco"), new Address("STRA1") );
         var containerFromDb = context.Containers.First();
         // Assert
         context.Containers.Count().ShouldBe(1);
@@ -30,7 +30,7 @@ public class ContainerRulesTest
         // Arrange
         WarehouseDbContext context = new DbContextTest();
         IContainerRules containerTest = new ContainerRules(context);
-        var container = containerTest.Create(1, new Article(1, "Coco"), new Address("STRA1") ).Result;
+        var container = containerTest.Create(1, new Article(1, "Coco"), new Address("STRA1") );
         // Act
         containerTest.Modified(container.Id, 100);
         var containerQtyModified = context.Containers.First();
@@ -45,7 +45,7 @@ public class ContainerRulesTest
         // Arrange
         WarehouseDbContext context = new DbContextTest();
         IContainerRules containerRules = new ContainerRules(context);
-        var container = containerRules.Create(1, new Article(1, "Coco"), new Address("STRA1") ).Result;
+        var container = containerRules.Create(1, new Article(1, "Coco"), new Address("STRA1") );
         // Act
         bool containerState = containerRules.Delete(container.Id);
         //Assert

@@ -37,12 +37,12 @@ public class AddressRules : IAddressRules
    
     public Address Modify(string codeId, string? description = default)
     {
-        Address? address = _context.Addresses.First(c => c.CodeId == codeId);
+        Address? address = _context.Addresses.FirstOrDefault(c => c.CodeId == codeId);
         if (address == null)
         {
-            throw new ($"address id doesn't exists: {codeId}");
+            throw new ($"Address id doesn't exists: {codeId}");
         }
-        if (description == default)
+        if (description == address.Description)
         {
             throw new ("there's nothing here to update");
         }
@@ -54,7 +54,7 @@ public class AddressRules : IAddressRules
     
     public bool Delete(string codeId)
     {
-        Address? address = _context.Addresses.First(c => c.CodeId == codeId);
+        Address? address = _context.Addresses.FirstOrDefault(c => c.CodeId == codeId);
         if (address == null)
         {
             throw new ($"Address id doesn't exists:{codeId}");

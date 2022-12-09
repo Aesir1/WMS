@@ -14,7 +14,7 @@ public class ContainerRules : IContainerRules
         _context = warehouseDbContext;
     }
 
-    public async Task<Container> Create(int qty, Article article, Address address)
+    public Container Create(int qty, Article article, Address address)
     {
         Container container = new Container(qty)
         {
@@ -25,7 +25,7 @@ public class ContainerRules : IContainerRules
         {
             _context.Containers.Add(container);
             // Todo Try and Catch for failing container saving
-            await _context.SaveChangesAsync();
+           _context.SaveChanges();
         }
         catch (Exception e)
         {
@@ -35,7 +35,7 @@ public class ContainerRules : IContainerRules
 
         return container;
     }
-    public async Task<Container> Modified(int id, int qty, Address? address = default, Article? article = default)
+    public Container Modified(int id, int qty, Address? address = default, Article? article = default)
     {
         Container? container = _context.Containers.FirstOrDefault(c => c.Id == id);
         if (container == null)
@@ -49,7 +49,7 @@ public class ContainerRules : IContainerRules
         container.Qty = qty;
         container.Address = address ?? container.Address;
         container.Article = article ?? container.Article;
-        await _context.SaveChangesAsync();
+        _context.SaveChanges();
         return container;
     }
 

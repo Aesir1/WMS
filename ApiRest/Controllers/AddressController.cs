@@ -42,7 +42,7 @@ public class AddressController : Controller
 
     [HttpPost]
     [Route("internal/[controller]/createAddress")]
-    public ActionResult<Address> Post([FromBody] string id,
+    public ActionResult<Address> CreateAddress([FromBody] string id,
         [FromBody] ICollection<Container>? containers = default, [FromBody] string? description = default)
     {
         IAddressRules addressRules = new AddressRules(_context);
