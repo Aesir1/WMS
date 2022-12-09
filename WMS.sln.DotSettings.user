@@ -1,12 +1,49 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	
 	<s:String x:Key="/Default/CodeInspection/Highlighting/SweaWarningsMode/@EntryValue">DoNotShowAndRun</s:String>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\Alain Gomez\.nuget\packages\microsoft.entityframeworkcore.relational\6.0.10\lib\net6.0\Microsoft.EntityFrameworkCore.Relational.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bc9f52ff_002D80cf_002D4aba_002D87f8_002Db63e761ca430/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ArticleCreated" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.StorageEntities&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.StorageRules.ContainerCreate&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.StorageRules.ContainerDelete&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=810d7203_002D114f_002D4e7a_002D9fc2_002D32838222a972/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreateListOfAddressesFixtureOnSuccess" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\adm_AGomez\personal\WMS" Presentation="&amp;lt;Tests&amp;gt;" /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bc9f52ff_002D80cf_002D4aba_002D87f8_002Db63e761ca430/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ArticleCreated" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.StorageEntities&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.StorageRules.ContainerCreate&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.StorageRules.ContainerDelete&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.ContainerRulesTest.ContainerCreate&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.ContainerRulesTest.ContainerDelete&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.ContainerRulesTest&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.AddressRulesTest.AddressModified&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.AddressRulesTest.AddressInvariableWithExistingContainers&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.AddressRulesTest.AddressDeleteInvariableWhenExistingContainer&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.AddressRulesTest.AddressDelete&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.AddressRulesTest.AddressDoppleIdCreate&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.AddressRulesTest.AddressDoubleIdCreate&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.AddressRulesTest&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.ArticleRulesTest.ArticleCreate&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.ArticleRulesTest.ArticleModified&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Storage.ArticleRulesTest.ArticleDelete&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Controllers.ContainerControllerTest.GetOnSuccessContainerList&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Controllers.ContainerControllerTest.CreateContainerOnSuccess&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Controllers.ContainerControllerTest.CreateContainerOnFail&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Controllers.ContainerControllerTest.ModifiedContainerOnFail&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.Controllers.ContainerControllerTest&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.FixtureTest.CreateOneContainerFixtureOnSuccess&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.FixtureTest.CreateListOfContainerFixtureOnSuccess&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.FixtureTest.CreateOneArticleFixtureOnSuccess&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.FixtureTest.CreateListOfArticleFixtureOnSuccess&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::207634DA-7152-4285-93DD-F91ED88982C9::net6.0::IntegrationTest.FixtureTest&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+    &lt;And&gt;&#xD;
+      &lt;Project Location="C:\Users\adm_AGomez\personal\WMS\XunitTest" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;XunitTest&amp;gt;" /&gt;&#xD;
+      &lt;Namespace&gt;XunitTest.Storage&lt;/Namespace&gt;&#xD;
+    &lt;/And&gt;&#xD;
+    &lt;And&gt;&#xD;
+      &lt;Project Location="C:\Users\adm_AGomez\personal\WMS\IntegrationTest" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;IntegrationTest&amp;gt;" /&gt;&#xD;
+      &lt;Namespace&gt;IntegrationTest.Controllers&lt;/Namespace&gt;&#xD;
+    &lt;/And&gt;&#xD;
+  &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

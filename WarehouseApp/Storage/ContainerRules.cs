@@ -1,12 +1,11 @@
-using WarehouseApp.InterfacesStorage;
+using WarehouseApp.Interfaces;
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
-using WarehouseCore.Exceptions;
 using WarehouseInfrastructure.Contexts;
 
 namespace WarehouseApp.Storage;
 
-public class ContainerRules : IContainerCreate, IContainerModified, IContainerDelete
+public class ContainerRules : IContainerRules
 {
     private readonly WarehouseDbContext _context;
 
@@ -15,42 +14,37 @@ public class ContainerRules : IContainerCreate, IContainerModified, IContainerDe
         _context = warehouseDbContext;
     }
 
-    public Container Create(int id, int qty, Article article, Address address)
+    public Container Create(int qty, Article article, Address address)
     {
-        Container container = new Container(id, qty)
+        Container container = new Container(qty)
         {
             Article = article,
             Address = address
         };
         try
         {
-            // possible double container id reference
             _context.Containers.Add(container);
-            _context.SaveChanges();
+            // Todo Try and Catch for failing container saving
+           _context.SaveChanges();
         }
-        catch (ContainerIdMatch containerIdMatch)
+        catch (Exception e)
         {
-            // ToDo need to improve this exception will be part of the test phase
-            throw containerIdMatch;
-        }
-        catch (Exception ex)
-        {
-            
-            throw ex;
+            Console.WriteLine(e);
+            throw;
         }
 
         return container;
     }
     public Container Modified(int id, int qty, Address? address = default, Article? article = default)
     {
-        Container? container = _context.Containers.First(c => c.ContainerId == id);
+        Container? container = _context.Containers.FirstOrDefault(c => c.Id == id);
         if (container == null)
         {
-            throw new ContainerIdMissing();
+            throw new Exception($"Container ID: {id} not found");
         }
-        if (qty == default && address == default && article == default)
+        if (qty == container.Qty && address == container.Address && article == container.Article)
         {
-            throw new ContainerNoModified();
+            throw new Exception($"Container Nr: {id} has nothing to modified");
         }
         container.Qty = qty;
         container.Address = address ?? container.Address;
@@ -61,21 +55,15 @@ public class ContainerRules : IContainerCreate, IContainerModified, IContainerDe
 
     public bool Delete(int id)
     {
-        Container? container = _context.Containers.First(c => c.ContainerId == id);
+        Container? container = _context.Containers.FirstOrDefault(c => c.Id == id);
         if (container == null)
         {
-            throw new ContainerIdMissing();
+            throw new Exception($"Container ID: {id} not found");
         }
 
-        try
-        {
-            _context.Containers.Remove(container);
-            _context.SaveChanges();
-            return true;
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
+        _context.Containers.Remove(container);
+        // Todo Try and catch for failing saveChanges
+        _context.SaveChanges();
+        return true;
     }
 }

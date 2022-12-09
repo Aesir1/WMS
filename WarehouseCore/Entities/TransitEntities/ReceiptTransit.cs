@@ -5,7 +5,7 @@ namespace WarehouseCore.Entities.TransitEntities;
 
 public class ReceiptTransit : TransitBase
 {
-    public ReceiptTransit(int id, Address address) : base(id, address, TransitLabel.GoodsReceipt)
+    public ReceiptTransit(Address address) : base(address, TransitLabel.GoodsReceipt)
     {
     }
 }

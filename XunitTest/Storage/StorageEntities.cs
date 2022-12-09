@@ -1,3 +1,4 @@
+using IntegrationTest;
 using Shouldly;
 using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
@@ -5,7 +6,7 @@ using WarehouseCore.Exceptions;
 using WarehouseInfrastructure.Contexts;
 using Xunit;
 
-namespace IntegrationTest.Storage;
+namespace XunitTest.Storage;
 
 public class StorageEntities
 {
@@ -19,7 +20,7 @@ public class StorageEntities
         {
             Containers = new List<Container>
             {
-                new(1111, 5)
+                new(5)
                 {
                     Address = new Address("STRA1")
                     {
@@ -44,11 +45,11 @@ public class StorageEntities
     {
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
-        dbContext.Articles.Add(new Article(1,"Laptop")
+        dbContext.Articles.Add(new Article(1, "Laptop")
         {
             Containers = new List<Container>
             {
-                new(1111, 5)
+                new(5)
                 {
                     Address = new Address("STRA1")
                     {
@@ -77,11 +78,11 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article(1, "Laptop")
+        dbContext.Articles.Add(new Article(1,"Laptop")
         {
             Containers = new List<Container>
             {
-                new(1111, 5)
+                new(5)
                 {
                     Address = new Address("STRA1")
                     {
@@ -112,11 +113,11 @@ public class StorageEntities
         // Arrange
         WarehouseDbContext dbContext = new DbContextTest();
 
-        dbContext.Articles.Add(new Article(1, "Laptop")
+        dbContext.Articles.Add(new Article(1,"Laptop")
         {
             Containers = new List<Container>
             {
-                new(1111, 5)
+                new(5)
                 {
                     Address = new Address("STRA1")
                     {
@@ -148,7 +149,7 @@ public class StorageEntities
         {
             Containers = new List<Container>
             {
-                new(1111, 0)
+                new(0)
                 {
                     Address = new Address("STRA1")
                     {

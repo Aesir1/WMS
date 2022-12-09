@@ -10,8 +10,4 @@ public class User : IdEntity
     public Permission Permission { get; set; }
     public UserInfo? UserInfo { get; set; }
     public ICollection<Department> Departments { get; set; }
-
-    public User(int id) : base(id)
-    {
-    }
 }

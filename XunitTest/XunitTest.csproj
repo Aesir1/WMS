@@ -12,4 +12,13 @@
       <PackageReference Include="xunit" Version="2.4.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\IntegrationTest\IntegrationTest.csproj" />
+      <ProjectReference Include="..\WarehouseInfrastructure\WarehouseInfrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="User" />
+    </ItemGroup>
+
 </Project>

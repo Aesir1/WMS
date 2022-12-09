@@ -1,10 +1,19 @@
-# WMS => Warehouse Managment System
+# Warehouse Management System 
 ### What's an WMS?
-It's bla bla bla.
-
+A warehouse management system (WMS) consists of software and processes that allow organizations to control and administer warehouse operations from the time goods or materials enter a warehouse until they move out.
+### What does this WMS do?
+The purpose of a WMS is to help ensure that goods and materials move through warehouses in the most efficient and cost-effective way. 
+This application handle the following aspects:
+- Infrastructure management (Create, Modify and delete)
+- Reception of goods
+- Shipment of goods
+- Internal shipments (between internal warehouses)
+- Inventory
+- Picking process
 ### Objectives:
-This project has only **educational objectives** behind it. Throught it will be applied the following list of contents
+This project has only **educational objectives** behind it. Through it will be applied the following list of contents
   - Clean code architecture design
-  - Entity Framework Core
+  - Unit and Integration tests
+  - Entity Framework Core 
   - REST & gRPC APIs
-  - basic concepts from OOP and C# specifcs concepts
+  - basic concepts from OOP and C# specifics concepts
