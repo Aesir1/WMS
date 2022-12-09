@@ -40,16 +40,11 @@ public class ArticleRules : IArticleRules
     public Article Modify(int id, string? name = default,
         Dimension? dimension = default, Heaviness? heaviness = default)
     {
-        Article? article = _context.Articles.FirstOrDefault(c => c.Id == id);
-        if (article == null)
-        {
-            throw new($"Article ID doesn't exists: {id}");
-        }
+        var article = _context.Articles.FirstOrDefault(c => c.Id == id);
+        if (article == null) throw new Exception($"Article ID doesn't exists: {id}");
 
-        if (name == default && dimension == default && heaviness == default)
-        {
-            throw new("there's nothing here to update");
-        }
+        if (name == article.Name && dimension == article.Dimension && heaviness == article.Heaviness)
+            throw new Exception("there's nothing here to update");
 
         article.Name = name ?? article.Name;
         article.Dimension = dimension ?? article.Dimension;
@@ -60,21 +55,11 @@ public class ArticleRules : IArticleRules
 
     public bool Delete(int id)
     {
-        Article? article = _context.Articles.FirstOrDefault(a => a.Id == id);
-        if (article == null)
-        {
-            throw new($"Article ID doesn't exists:{id}");
-        }
+        var article = _context.Articles.FirstOrDefault(a => a.Id == id);
+        if (article == null) throw new Exception($"Article ID doesn't exists:{id}");
 
-        try
-        {
-            _context.Articles.Remove(article);
-            _context.SaveChanges();
-            return true;
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
+        _context.Articles.Remove(article);
+        _context.SaveChanges();
+        return true;
     }
 }

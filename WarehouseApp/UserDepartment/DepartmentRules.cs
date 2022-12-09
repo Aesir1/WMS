@@ -10,6 +10,6 @@ public class DepartmentRules
     {
         _context = context;
     }
-    
+
     // ToDo Future feature create/delete departments and modified the personal attach to it
 }

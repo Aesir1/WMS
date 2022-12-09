@@ -6,9 +6,10 @@ namespace ApiRest.Extensions;
 public static class StatusCodeResponseExtensions
 {
     private const int DefaultCodeForNotModified = StatusCodes.Status304NotModified;
+
     /// <summary>
-    /// NotModified method of type ObjectResult
-    /// StatusCode int 304
+    ///     NotModified method of type ObjectResult
+    ///     StatusCode int 304
     /// </summary>
     /// <param name="controllerBase"></param>
     /// <param name="value"></param>

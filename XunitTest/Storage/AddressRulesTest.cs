@@ -18,30 +18,29 @@ public class AddressRulesTest
         WarehouseDbContext context = new DbContextTest();
         IAddressRules addressCreateTest = new AddressRules(context);
         //Act
-        var address = addressCreateTest.Create(codeId: "Temp1", description: "Temporary address");
+        var address = addressCreateTest.Create("Temp1", description: "Temporary address");
         var addressFromDb = context.Addresses.First();
         //Assert
         context.Addresses.Count().ShouldBe(1);
         address.CodeId.ShouldBe(addressFromDb.CodeId);
     }
     
-
     [Fact]
     public void AddressModified()
     {
         // Arrange
         WarehouseDbContext context = new DbContextTest();
         IAddressRules addressCreateTest = new AddressRules(context);
-        Article articleRef = new Article(21, "Something");
-        var address = addressCreateTest.Create(codeId: "Temp1",
-            containers: new List<Container>()
+        var articleRef = new Article(21, "Something");
+        var address = addressCreateTest.Create("Temp1",
+            new List<Container>
             {
-                new Container(3) { Article = articleRef },
-                new Container(69) { Article = articleRef }
-            }, description: "Temporary text");
+                new(3) { Article = articleRef },
+                new(69) { Article = articleRef }
+            }, "Temporary text");
 
         // Act
-        addressCreateTest.Modify(codeId: "Temp1", description: "Forever young");
+        addressCreateTest.Modify("Temp1", "Forever young");
         var addressFromDb = context.Addresses.First();
         // Assert
         context.Addresses.Count().ShouldBe(1);
@@ -57,13 +56,13 @@ public class AddressRulesTest
         // Arrange
         WarehouseDbContext context = new DbContextTest();
         IAddressRules addressCreateTest = new AddressRules(context);
-        Article articleRef = new Article(21, "Something");
-        var address = addressCreateTest.Create(codeId: "Temp1",
-            containers: new List<Container>()
+        var articleRef = new Article(21, "Something");
+        var address = addressCreateTest.Create("Temp1",
+            new List<Container>
             {
-                new Container(3) { Article = articleRef },
-                new Container(69) { Article = articleRef }
-            }, description: "Temporary text");
+                new(3) { Article = articleRef },
+                new(69) { Article = articleRef }
+            }, "Temporary text");
         // Assert 
         Should.Throw<Exception>(() => addressCreateTest.Delete("Temp1"));
     }
@@ -74,10 +73,10 @@ public class AddressRulesTest
         // Arrange
         WarehouseDbContext context = new DbContextTest();
         IAddressRules addressCreateTest = new AddressRules(context);
-        Article articleRef = new Article(21, "Something");
-        var address = addressCreateTest.Create(codeId: "Temp1", description: "Temporary text");
+        var articleRef = new Article(21, "Something");
+        var address = addressCreateTest.Create("Temp1", description: "Temporary text");
         // Act 
-        bool addressdeleted = addressCreateTest.Delete("Temp1");
+        var addressdeleted = addressCreateTest.Delete("Temp1");
         // Assert
         addressdeleted.ShouldBe(true);
     }

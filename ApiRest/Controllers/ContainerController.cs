@@ -18,26 +18,20 @@ public class ContainerController : Controller
     }
 
     [HttpGet]
-    [Route("internal/[controller]/getContainer:Id")]
+    [Route("internal/[controller]/getContainer/")]
     public ActionResult<Container> GetContainer(int id)
     {
-        Container? container = _context.Containers.FirstOrDefault(c => c.Id == id);
-        if (container == null)
-        {
-            return NotFound();
-        }
+        var container = _context.Containers.FirstOrDefault(c => c.Id == id);
+        if (container == null) return NotFound();
         return Ok(container);
     }
-    
+
     [HttpGet]
     [Route("internal/[controller]/getContainers")]
     public ActionResult<ICollection<Container>> GetContainers()
     {
         var containers = _context.Containers.ToList();
-        if (!containers.Any())
-        {
-            return NotFound();
-        }
+        if (!containers.Any()) return NotFound();
         return Ok(containers);
     }
 
@@ -80,17 +74,18 @@ public class ContainerController : Controller
             //return StatusCode(304,e);
             return this.NotModified(e);
         }
+
         // Todo refinement from URI signalization
         return Ok(container);
     }
 
     [HttpDelete]
-    [Route("internal/[controller]/deleteContainer")]
+    [Route("internal/[controller]/deleteContainer/")]
     public ActionResult DeleteContainer(int id)
     {
         IContainerRules containerCreate = new ContainerRules(_context);
         try
-        { 
+        {
             containerCreate.Delete(id);
         }
         catch (Exception e)
@@ -98,6 +93,7 @@ public class ContainerController : Controller
             Console.WriteLine(e);
             return this.NotModified(e);
         }
+
         return NoContent();
     }
 }

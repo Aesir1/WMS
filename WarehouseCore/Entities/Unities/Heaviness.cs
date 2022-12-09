@@ -1,5 +1,4 @@
 using WarehouseCore.Entities.AbstractEntities;
-using WarehouseCore.Entities.Product;
 
 namespace WarehouseCore.Entities.Unities;
 
@@ -9,6 +8,6 @@ public class Heaviness : UnitEntity
     {
         Weight = weight;
     }
-    
+
     public double Weight { get; set; }
 }

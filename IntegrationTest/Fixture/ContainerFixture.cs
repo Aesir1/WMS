@@ -9,8 +9,8 @@ namespace IntegrationTest.Fixture;
 public static class ContainerFixture
 {
     public static readonly int Qty = 5;
-    public static readonly Address Address = new Address("STRA1");
-    public static readonly Article Article = new Article(11, "Laptop");
+    public static readonly Address Address = new("STRA1");
+    public static readonly Article Article = new(11, "Laptop");
 
     public static void CreateOneContainer(WarehouseDbContext context)
     {
