@@ -57,7 +57,7 @@ public class ContainerController : Controller
     }
 
     [HttpPatch]
-    [Route("internal/[controller]/modifiedContainer")]
+    [Route("internal/[controller]/modifyContainer")]
     public ActionResult<Container> ModifyContainer(int id, int qty, [FromBody] Address? address = default,
         [FromBody] Article? article = default)
     {
