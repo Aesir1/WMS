@@ -1,3 +1,4 @@
+[![Continuous Integration and Deployment](https://github.com/Aesir1/WMS/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/Aesir1/WMS/actions/workflows/ci-cd.yaml)
 # Warehouse Management System 
 ### What's an WMS?
 A warehouse management system (WMS) consists of software and processes that allow organizations to control and administer warehouse operations from the time goods or materials enter a warehouse until they move out.
