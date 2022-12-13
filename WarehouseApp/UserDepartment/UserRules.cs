@@ -25,18 +25,11 @@ public class UserRules : IUserRules
             UserInfo = userInfo,
             Departments = departments
         };
-        try
-        {
-            // ToDo possible user id reference specific implementations required  
+        
+        // ToDo possible user id reference specific implementations required  
             _context.Users.Add(user);
             _context.SaveChanges();
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-
-        return user;
+            return user;
     }
 
     public User Modified(int id, string? email = default, string? password = default, Permission? permission = default,
@@ -59,16 +52,9 @@ public class UserRules : IUserRules
     {
         var user = _context.Users.First(c => c.Id == id);
         if (user == null) throw new Exception($"Address id doesn't exists:{id}");
-
-        try
-        {
+        
             _context.Users.Remove(user);
             _context.SaveChanges();
             return true;
         }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-    }
 }

@@ -6,8 +6,8 @@ public class ExternalArticle : IdEntity
 {
     public ExternalArticle(string isbn)
     {
-        ISBN = isbn;
+        Isbn = isbn;
     }
 
-    public string ISBN { get; set; }
+    public string Isbn { get; set; }
 }
