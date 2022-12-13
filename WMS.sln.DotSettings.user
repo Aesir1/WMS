@@ -3,6 +3,7 @@
 	<s:String x:Key="/Default/CodeInspection/Highlighting/SweaWarningsMode/@EntryValue">DoNotShowAndRun</s:String>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\Alain Gomez\.nuget\packages\microsoft.entityframeworkcore.relational\6.0.10\lib\net6.0\Microsoft.EntityFrameworkCore.Relational.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\adm_AGomez\.nuget\packages\shouldly\4.1.0\lib\netstandard2.0\Shouldly.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=810d7203_002D114f_002D4e7a_002D9fc2_002D32838222a972/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreateListOfAddressesFixtureOnSuccess" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\Users\adm_AGomez\personal\WMS" Presentation="&amp;lt;Tests&amp;gt;" /&gt;&#xD;
