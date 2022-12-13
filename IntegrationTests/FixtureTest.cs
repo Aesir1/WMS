@@ -21,7 +21,7 @@ public class FixtureTest
         containersAfter.Count.ShouldBe(1);
     }
 
-    [Fact]
+    //[Fact]
     public void CreateListOfContainerFixtureOnSuccess()
     {
         // Arrange

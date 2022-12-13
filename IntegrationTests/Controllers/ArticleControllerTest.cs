@@ -119,7 +119,7 @@ public class ArticleControllerTest
             .Value.ShouldBeOfType<Exception>().Message.ShouldBe($"Article ID doesn't exists: {1}");
     }
 
-    //[Fact]
+    [Fact]
     public void ModifyArticleOnFailWhenNothingToModify()
     {
         // Arrange
@@ -127,7 +127,7 @@ public class ArticleControllerTest
         ArticleFixture.CreateOneArticle(context);
         var articleController = new ArticleController(context);
         // Act
-        var result = articleController.ModifyArticle(ArticleFixture.Id).Result;
+        var result = articleController.ModifyArticle(ArticleFixture.Id, ArticleFixture.Name, dimension: ArticleFixture.Dimension, heaviness: ArticleFixture.Heaviness).Result;
         //
         result.ShouldBeOfType<ObjectResult>().StatusCode.ShouldBe(304);
         result.ShouldBeOfType<ObjectResult>()
