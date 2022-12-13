@@ -24,16 +24,9 @@ public class ArticleRules : IArticleRules
             Dimension = dimension,
             Heaviness = heaviness
         };
-        try
-        {
+        
             _context.Articles.Add(article);
             _context.SaveChanges();
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-
         return article;
     }
 

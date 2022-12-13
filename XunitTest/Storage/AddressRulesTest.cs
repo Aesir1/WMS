@@ -32,7 +32,7 @@ public class AddressRulesTest
         WarehouseDbContext context = new DbContextTest();
         IAddressRules addressCreateTest = new AddressRules(context);
         var articleRef = new Article(21, "Something");
-        var address = addressCreateTest.Create("Temp1",
+        addressCreateTest.Create("Temp1",
             new List<Container>
             {
                 new(3) { Article = articleRef },
@@ -57,7 +57,7 @@ public class AddressRulesTest
         WarehouseDbContext context = new DbContextTest();
         IAddressRules addressCreateTest = new AddressRules(context);
         var articleRef = new Article(21, "Something");
-        var address = addressCreateTest.Create("Temp1",
+        addressCreateTest.Create("Temp1",
             new List<Container>
             {
                 new(3) { Article = articleRef },
@@ -73,8 +73,7 @@ public class AddressRulesTest
         // Arrange
         WarehouseDbContext context = new DbContextTest();
         IAddressRules addressCreateTest = new AddressRules(context);
-        var articleRef = new Article(21, "Something");
-        var address = addressCreateTest.Create("Temp1", description: "Temporary text");
+        addressCreateTest.Create("Temp1", description: "Temporary text");
         // Act 
         var addressdeleted = addressCreateTest.Delete("Temp1");
         // Assert
