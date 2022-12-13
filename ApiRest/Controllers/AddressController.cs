@@ -56,7 +56,7 @@ public class AddressController : Controller
     }
 
     [HttpPatch]
-    [Route("internal/[controller]/modifiedAddress")]
+    [Route("internal/[controller]/modifyAddress")]
     public ActionResult<Address> ModifyAddress([FromBody] string codeId, string? description = default)
     {
         IAddressRules addressRules = new AddressRules(_context);
