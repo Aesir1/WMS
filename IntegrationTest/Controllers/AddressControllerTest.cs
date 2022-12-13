@@ -5,6 +5,7 @@ using Shouldly;
 using WarehouseCore.Entities.Storage;
 using WarehouseInfrastructure.Contexts;
 using Xunit;
+using Xunit.Sdk;
 
 namespace IntegrationTest.Controllers;
 

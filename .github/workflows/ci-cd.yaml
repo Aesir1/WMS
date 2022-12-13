@@ -19,8 +19,8 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
         
-      - name: Build start
+      - name: Build app
         run: dotnet build -c Release --no-restore
       
       - name: Run automated tests
-        run: dotnet test -c Release --no-build --no-restore
+        run: dotnet test -c Release --no-build
