@@ -3,7 +3,7 @@ using WarehouseCore.Entities.Organisation;
 
 namespace WarehouseCore.Entities.User;
 
-public class User : GuidEntity
+public class User : IdEntity
 {
     public string Email { get; set; }
     public string Password { get; set; }

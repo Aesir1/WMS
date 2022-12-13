@@ -1,13 +1,18 @@
 using WarehouseCore.Entities.AbstractEntities;
 using WarehouseCore.Entities.Storage;
 using WarehouseCore.Entities.Unities;
+using WarehouseCore.Interfaces;
 
 namespace WarehouseCore.Entities.Product;
 
-public class Article : GuidEntity
+/// <summary>
+///     Article is a product reference that can be allocated into many container
+/// </summary>
+public class Article : IdEntity, IAttachableToContainer
 {
-    public Article(string name)
+    public Article(int id, string name)
     {
+        Id = id;
         Name = name;
     }
 
@@ -17,5 +22,5 @@ public class Article : GuidEntity
     public Dimension? Dimension { get; set; }
 
     public Heaviness? Heaviness { get; set; }
-    public ICollection<Container> Containers { get; set; }
+    public ICollection<Container>? Containers { get; set; }
 }

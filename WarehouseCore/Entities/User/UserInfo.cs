@@ -1,8 +1,9 @@
+using WarehouseCore.Entities.AbstractEntities;
+
 namespace WarehouseCore.Entities.User;
 
-public class UserInfo
+public class UserInfo : IdEntity
 {
-    public Guid UserId { get; set; }
     public string Street { get; set; }
     public string Nr { get; set; }
     public int PostalCode { get; set; }

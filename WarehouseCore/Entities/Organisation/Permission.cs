@@ -2,7 +2,7 @@ using WarehouseCore.Entities.AbstractEntities;
 
 namespace WarehouseCore.Entities.Organisation;
 
-public class Permission : GuidEntity
+public class Permission : IdEntity
 {
     public bool UserManager { get; set; }
     public bool Delete { get; set; }

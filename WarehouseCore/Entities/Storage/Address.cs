@@ -1,11 +1,18 @@
 using WarehouseCore.Entities.AbstractEntities;
+using WarehouseCore.Interfaces;
 
 namespace WarehouseCore.Entities.Storage;
 
+/// ///
 /// <summary>
-///     Address can only handle with container that means a direct assignment from article in one address isn't a allowed
+///     Address is a reference place where container can be allocated, that means that address dont handle neither with
+///     container nor articles related logic
 /// </summary>
-public class Address : CodeEntity
+public class Address : CodeEntity, IAttachableToContainer
 {
-    public ICollection<Container> Containers { get; set; }
+    public Address(string codeId) : base(codeId)
+    {
+    }
+
+    public ICollection<Container>? Containers { get; set; }
 }

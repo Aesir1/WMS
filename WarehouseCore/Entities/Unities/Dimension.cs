@@ -1,17 +1,16 @@
 using WarehouseCore.Entities.AbstractEntities;
-using WarehouseCore.Entities.Product;
 
 namespace WarehouseCore.Entities.Unities;
 
-public class Dimension : CodeEntity
+public class Dimension : UnitEntity
 {
-    public Dimension(decimal length, decimal width)
+    public Dimension(string unit, decimal length, decimal width) : base(unit)
     {
         Length = length;
         Width = width;
     }
 
     public decimal Length { get; set; }
+
     public decimal Width { get; set; }
-    public ICollection<Article> Articles { get; set; }
 }
