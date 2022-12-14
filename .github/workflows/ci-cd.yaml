@@ -24,3 +24,13 @@ jobs:
       
       - name: Run automated tests
         run: dotnet test -c Release --no-build
+        
+      - name: Publish app
+        run: dotnet publish -c Release -o ./out
+        
+      - name: Deploy to azure with publish credentials
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: warehouse-cargo
+          publish-profile: ${{ secrets.AZURE_PUBLISH_SECRET }}
+          package: ./out
