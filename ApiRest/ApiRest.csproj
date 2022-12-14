@@ -7,12 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.1">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\WarehouseApp\WarehouseApp.csproj"/>
-        <ProjectReference Include="..\WarehouseInfrastructure\WarehouseInfrastructure.csproj"/>
+        <ProjectReference Include="..\WarehouseApp\WarehouseApp.csproj" />
+        <ProjectReference Include="..\WarehouseInfrastructure\WarehouseInfrastructure.csproj" />
     </ItemGroup>
 
 </Project>
