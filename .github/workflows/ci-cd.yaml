@@ -26,7 +26,7 @@ jobs:
         run: dotnet test -c Release --no-build
         
       - name: Publish app
-        run: dotnet publish -c Release -o ./out
+        run: dotnet publish ./ApiRest/ApiRest.csproj -c Release -o ./out
         
       - name: Deploy to azure with publish credentials
         uses: azure/webapps-deploy@v2
