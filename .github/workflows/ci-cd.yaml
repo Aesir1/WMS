@@ -19,8 +19,18 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
         
-      - name: Build start
+      - name: Build app
         run: dotnet build -c Release --no-restore
       
       - name: Run automated tests
         run: dotnet test -c Release --no-build
+        
+      - name: Publish app
+        run: dotnet publish ./ApiRest/ApiRest.csproj -c Release -o ./out
+        
+      - name: Deploy to azure with publish credentials
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: warehouse-cargo
+          publish-profile: ${{ secrets.AZURE_PUBLISH_SECRET }}
+          package: ./out

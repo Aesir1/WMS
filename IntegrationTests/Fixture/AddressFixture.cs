@@ -2,7 +2,7 @@ using WarehouseApp.Interfaces;
 using WarehouseApp.Storage;
 using WarehouseInfrastructure.Contexts;
 
-namespace IntegrationTest.Fixture;
+namespace IntegrationTests.Fixture;
 
 public class AddressFixture
 {

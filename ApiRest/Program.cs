@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<WarehouseDbContext>(optionsAction =>
-    optionsAction.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+    optionsAction.UseSqlServer("name=ConnectionStrings:AZURE_SQL_CONNECTIONSTRING"));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

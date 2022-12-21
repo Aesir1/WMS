@@ -1,12 +1,11 @@
-using IntegrationTest;
+using IntegrationTests;
 using Shouldly;
 using WarehouseApp.Interfaces;
 using WarehouseApp.Storage;
 using WarehouseCore.Entities.Unities;
 using WarehouseInfrastructure.Contexts;
-using Xunit;
 
-namespace XunitTest.Storage;
+namespace UnitTests.Storage;
 
 public class ArticleRulesTest
 {

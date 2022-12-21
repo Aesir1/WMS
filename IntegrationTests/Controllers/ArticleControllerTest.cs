@@ -1,12 +1,11 @@
 using ApiRest.Controllers;
-using IntegrationTest.Fixture;
+using IntegrationTests.Fixture;
 using Microsoft.AspNetCore.Mvc;
 using Shouldly;
 using WarehouseCore.Entities.Product;
 using WarehouseInfrastructure.Contexts;
-using Xunit;
 
-namespace IntegrationTest.Controllers;
+namespace IntegrationTests.Controllers;
 
 public class ArticleControllerTest
 {
@@ -128,7 +127,7 @@ public class ArticleControllerTest
         ArticleFixture.CreateOneArticle(context);
         var articleController = new ArticleController(context);
         // Act
-        var result = articleController.ModifyArticle(ArticleFixture.Id).Result;
+        var result = articleController.ModifyArticle(ArticleFixture.Id, ArticleFixture.Name, dimension: ArticleFixture.Dimension, heaviness: ArticleFixture.Heaviness).Result;
         //
         result.ShouldBeOfType<ObjectResult>().StatusCode.ShouldBe(304);
         result.ShouldBeOfType<ObjectResult>()

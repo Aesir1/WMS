@@ -1,13 +1,13 @@
-using IntegrationTest.Fixture;
+using IntegrationTests.Fixture;
 using Shouldly;
 using WarehouseInfrastructure.Contexts;
 using Xunit;
 
-namespace IntegrationTest;
+namespace IntegrationTests;
 
 public class FixtureTest
 {
-    [Fact]
+    //[Fact]
     public void CreateOneContainerFixtureOnSuccess()
     {
         // Arrange
@@ -21,7 +21,7 @@ public class FixtureTest
         containersAfter.Count.ShouldBe(1);
     }
 
-    [Fact]
+    //[Fact]
     public void CreateListOfContainerFixtureOnSuccess()
     {
         // Arrange

@@ -4,7 +4,7 @@ using WarehouseCore.Entities.Product;
 using WarehouseCore.Entities.Storage;
 using WarehouseInfrastructure.Contexts;
 
-namespace IntegrationTest.Fixture;
+namespace IntegrationTests.Fixture;
 
 public static class ContainerFixture
 {

@@ -2,7 +2,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using WarehouseInfrastructure.Contexts;
 
-namespace IntegrationTest;
+namespace IntegrationTests;
 
 public sealed class DbContextTest : WarehouseDbContext
 {

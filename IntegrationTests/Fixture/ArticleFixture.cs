@@ -3,7 +3,7 @@ using WarehouseApp.Storage;
 using WarehouseCore.Entities.Unities;
 using WarehouseInfrastructure.Contexts;
 
-namespace IntegrationTest.Fixture;
+namespace IntegrationTests.Fixture;
 
 public static class ArticleFixture
 {

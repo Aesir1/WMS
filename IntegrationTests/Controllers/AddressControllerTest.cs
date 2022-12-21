@@ -1,12 +1,11 @@
 using ApiRest.Controllers;
-using IntegrationTest.Fixture;
+using IntegrationTests.Fixture;
 using Microsoft.AspNetCore.Mvc;
 using Shouldly;
 using WarehouseCore.Entities.Storage;
 using WarehouseInfrastructure.Contexts;
-using Xunit;
 
-namespace IntegrationTest.Controllers;
+namespace IntegrationTests.Controllers;
 
 public class AddressControllerTest
 {
