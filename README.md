@@ -18,3 +18,12 @@ This project has only **educational objectives** behind it. Through it will be a
   - Entity Framework Core 
   - REST & gRPC APIs
   - basic concepts from OOP and C# specifics concepts
+
+
+### Migrations command
+## Add a new migration and update db structure 
+> dotnet ef migrations add ContextInjection  --startup-project WarehouseApp --project WarehouseInfrastructure --context WarehouseInfrastructure.Contexts.WarehouseDbContext
+> dotnet ef database update --startup-project WarehouseApp --project WarehouseInfrastructure --context WarehouseInfrastructure.Contexts.WarehouseDbContext
+## Roll back to an old specifc migration and delete the last one
+dotnet ef database update <Migration>.<Name>  --startup-project WarehouseApp --project WarehouseInfrastructure --context WarehouseInfrastructure.Contexts.WarehouseDbContext
+dotnet ef migrations remove --project WarehouseInfrastructure --context WarehouseDbContext --startup-project WarehouseApp
