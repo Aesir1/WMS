@@ -30,3 +30,6 @@ This project has only **educational objectives** behind it. Through it will be a
 > dotnet ef database update <Migration>.<Name>  --startup-project WarehouseApp --project WarehouseInfrastructure --context WarehouseInfrastructure.Contexts.WarehouseDbContext
 > 
 > dotnet ef migrations remove --project WarehouseInfrastructure --context WarehouseDbContext --startup-project WarehouseApp
+
+## Docker db command
+> docker run -e "ACCEPT_EULA=Y" --name db -e "MSSQL_SA_PASSWORD=Test1234@" -e "MSSQL_PID=Express" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
